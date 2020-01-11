@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'DeckOfCards.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,58 +33,51 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: 20.0),
-        height: 96.0,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
+        child: Column(
           children: <Widget>[
-            homeCards.categoryCard('images/Burger.jpg', "Burgers"),
-            homeCards.categoryCard('images/Chicken.jfif', "Chicken"),
-            homeCards.categoryCard('images/Rice.jpg', "Rice"),
-            homeCards.categoryCard('images/Local.jpg', "Local"),
-            homeCards.categoryCard('images/More.jpg', "More")
+            Container(
+                height: 96.0,
+                margin: EdgeInsets.symmetric(vertical: 8.0),
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      DeckOfCards.categoryCard('images/Burger.jpg', "Burgers"),
+                      DeckOfCards.categoryCard('images/Chicken.jfif', "Chicken"),
+                      DeckOfCards.categoryCard('images/Rice.jpg', "Rice"),
+                      DeckOfCards.categoryCard('images/Local.jpg', "Local"),
+                      DeckOfCards.categoryCard('images/Noodles.jpg', "More...")
+                    ]
+                )
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.fromLTRB(12, 12, 0, 4),
+              child: Text(
+                "Restaurants",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                )
+              )
+            ),
+            Container(
+              height: 176.0,
+              child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    DeckOfCards.restaurantCard('images/Local.jpg', "Freddies"),
+                    DeckOfCards.restaurantCard('images/Burger.jpg', "Mr. Roberts"),
+                    DeckOfCards.restaurantCard('images/Chicken.jfif', "BBQ City"),
+                    DeckOfCards.restaurantCard('images/Noodles.jpg', "Sanbra"),
+                    DeckOfCards.restaurantCard('images/Rice.jpg', "More...")
+                  ]
+              )
+            )
           ]
         )
       )
-    );
-  }
-}
 
-
-class homeCards {
-
-  static Widget categoryCard(String imageDirName, String categoryName){
-    return Container(
-      width: 96.0,
-      child: Card(
-        elevation: 5,
-        margin: EdgeInsets.all(4.0),
-        semanticContainer: true,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(imageDirName),
-              fit: BoxFit.cover,
-            )
-          ),
-          child: Container(
-              margin: EdgeInsets.fromLTRB(8, 0, 0, 8),
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                categoryName,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                )
-              )
-          ),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-      ),
     );
   }
 }
