@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(title: 'Chop Chop'),
       routes: <String, WidgetBuilder>{
-        '/RestaurantProfilePage': (BuildContext context) => RestaurantPageProfile(),
+        '/RestaurantProfilePage': (BuildContext context) => RestaurantProfilePage(),
       },
       debugShowCheckedModeBanner: false,
     );

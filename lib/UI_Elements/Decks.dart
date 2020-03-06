@@ -22,10 +22,10 @@ class CategoryDeck extends StatelessWidget{
   }
 }
 
-class PlainCardDeck extends StatelessWidget{
+class RestaurantCardDeck extends StatelessWidget{
   final String deckTitle;
 
-  PlainCardDeck({@required this.deckTitle});
+  RestaurantCardDeck({@required this.deckTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +46,19 @@ class PlainCardDeck extends StatelessWidget{
         SizedBox(height: 18),
         Container(
             height: 154.0,
-            child: ListView(
-                padding: EdgeInsets.only(bottom: 10),
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  for(var mealItem in mealItemList.mealItems)
-                    //Should go through list of available/top restaurants NB: implement later
-                    RestaurantCard(
-                        restaurantName: mealItem.restaurantName,
-                        imageUrl: mealItem.imgUrl
-                    )
-                ]
+            child: ListView.builder(
+              padding: EdgeInsets.only(bottom: 10),
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap:() {Navigator.of(context).pushNamed('/RestaurantProfilePage');},
+                  child: RestaurantCard(
+                    restaurantName: mealItemList.mealItems[index].restaurantName,
+                    imageUrl: mealItemList.mealItems[index].imgUrl
+                  )
+                );
+              },
             )
         )
       ],
@@ -85,19 +87,21 @@ class MealDeck extends StatelessWidget{
         SizedBox(height: 18),
         Container(
           height: 200,
-          child: ListView(
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.only(bottom: 10),
-            children: <Widget>[
-              for(var mealItem in mealItemList.mealItems)
-                //iterate through Top Meal choice NB: implement later
-                 MealCard(
-                   mealName: mealItem.mealName,
-                   restaurantName: mealItem.restaurantName,
-                   price: mealItem.price,
-                   imageUrl: mealItem.imgUrl
-                 )
-            ]
+            itemCount: 5,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                //onTap: (){Navigator.of(context).pushNamed('/RestaurantProfilePage');},
+                child: MealCard(
+                  imageUrl: mealItemList.mealItems[index].imgUrl,
+                  mealName: mealItemList.mealItems[index].mealName,
+                  restaurantName: mealItemList.mealItems[index].restaurantName,
+                  price: mealItemList.mealItems[index].price
+                ),
+              );
+            },
           )
         )
       ],
