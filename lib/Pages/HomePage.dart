@@ -15,27 +15,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeStyle = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(// Code for the appBar
-          leading: IconButton(
-            icon: Icon(Icons.menu), // 3-line menu drawer icon
-            onPressed: () {},
-          ),
-          title: Image.asset( //LOGO
-            "images/Logo.png",
-            height: 45,
-            width: 45
-          ),
+          leading: IconButton(icon: Icon(Icons.menu), // 3-line menu drawer icon
+            onPressed: () {},),
+          title: Image.asset( "images/Logo.png", height: 45, width: 45),
           centerTitle: true, // places the logo in the middle of appbar
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                //Navigator.of(context).pushNamed('/RestaurantProfilePage');
-              }
-            ),
-          ]
-      ),
+            IconButton(icon: Icon(Icons.search),
+              onPressed: () {}),
+          ]),
       body: SafeArea(
         child: Container(
           child: ListView(
@@ -52,15 +43,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.only(left: 16),
-                child: Text(
-                  "More Choices",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  )
-                )
-              ),
+                child: Text("More Choices", style: themeStyle.textTheme.subhead),),
               SizedBox(height: 18),
               Container(
                 child: Column(
@@ -94,18 +77,13 @@ Widget title() {
           Text(
             "Let's",
             style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 25,
-                color: Color(0xFFA2A2A2)
+              fontWeight: FontWeight.w400,
+              fontSize: 25,
+              color: Color(0xFFA2A2A2),
             ),
           ),
-          Text(
-            "Chop",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 30,
-            ),
-          ),
+          Text("Chop",
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30,),),
         ],
       )
     ],

@@ -11,11 +11,11 @@ class CategoryDeck extends StatelessWidget{
         padding: EdgeInsets.only(bottom: 10),
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          categoryCard('images/Burger.jpg', "Burgers"),
-          categoryCard('images/Chicken.jfif', "Chicken"),
-          categoryCard('images/Rice.jpg', "Rice"),
-          categoryCard('images/Local.jpg', "Local"),
-          categoryCard('images/Noodles.jpg', "More...")
+          CategoryCard(imageDirName: 'images/Burger.jpg', categoryName: "Burgers"),
+          CategoryCard(imageDirName: 'images/Chicken.jfif', categoryName: "Chicken"),
+          CategoryCard(imageDirName: 'images/Rice.jpg', categoryName: "Rice"),
+          CategoryCard(imageDirName: 'images/Local.jpg', categoryName: "Local"),
+          CategoryCard(imageDirName: 'images/Noodles.jpg', categoryName: "More...")
         ]
       )
     );
@@ -33,15 +33,8 @@ class RestaurantCardDeck extends StatelessWidget{
       children: <Widget>[
         Container(
           alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(left: 16),
-          child: Text(
-            deckTitle,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )
-          )
+          margin: EdgeInsets.only(left: 16,),
+          child: Text(deckTitle, style: Theme.of(context).textTheme.subhead,)
         ),
         SizedBox(height: 18),
         Container(
@@ -51,16 +44,13 @@ class RestaurantCardDeck extends StatelessWidget{
               scrollDirection: Axis.horizontal,
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap:() {Navigator.of(context).pushNamed('/RestaurantProfilePage');},
-                  child: RestaurantCard(
-                    restaurantName: mealItemList.mealItems[index].restaurantName,
-                    imageUrl: mealItemList.mealItems[index].imgUrl
-                  )
+                return RestaurantCard(
+                  restaurantName: mealItemList.mealItems[index].restaurantName,
+                  imageUrl: mealItemList.mealItems[index].imgUrl
                 );
               },
-            )
-        )
+            ),
+        ),
       ],
     );
   }
@@ -75,14 +65,7 @@ class MealDeck extends StatelessWidget{
         Container(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(left: 16),
-          child: Text(
-            "Top Choices",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )
-          )
+          child: Text("Top Choices", style: Theme.of(context).textTheme.subhead,),
         ),
         SizedBox(height: 18),
         Container(
@@ -92,18 +75,15 @@ class MealDeck extends StatelessWidget{
             padding: EdgeInsets.only(bottom: 10),
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                //onTap: (){Navigator.of(context).pushNamed('/RestaurantProfilePage');},
-                child: MealCard(
-                  imageUrl: mealItemList.mealItems[index].imgUrl,
-                  mealName: mealItemList.mealItems[index].mealName,
-                  restaurantName: mealItemList.mealItems[index].restaurantName,
-                  price: mealItemList.mealItems[index].price
-                ),
+              return MealCard(
+                imageUrl: mealItemList.mealItems[index].imgUrl,
+                mealName: mealItemList.mealItems[index].mealName,
+                restaurantName: mealItemList.mealItems[index].restaurantName,
+                price: mealItemList.mealItems[index].price
               );
             },
-          )
-        )
+          ),
+        ),
       ],
     );
   }
