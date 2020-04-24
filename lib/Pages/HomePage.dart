@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: <Widget>[
               SizedBox(height: 24),
-              title(),
+              title("Let's", "Chop"),
               SizedBox(height: 24),
               CategoryDeck(),
               SizedBox(height: 26),
@@ -138,22 +138,22 @@ class DataSearch extends SearchDelegate<String> {
 }
 
 
-Widget title() {
+Widget title(String firstString, String secondWord) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
-      SizedBox(width: 16),
+      SizedBox(width: 37),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Let's",
+          Text(firstString,
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 25,
               color: Color(0xFFA2A2A2),
             ),
           ),
-          Text("Chop",
+          Text(secondWord,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30,),),
         ],
       ),
