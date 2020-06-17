@@ -4,6 +4,7 @@ import 'package:chop_chop_flutter/UI_Elements/BottomButtons.dart';
 import 'package:chop_chop_flutter/UI_Elements/ProfilePageElements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 class MealProfilePage extends StatefulWidget {
   MealProfilePage({Key key, this.title}) : super(key: key);
@@ -46,54 +47,48 @@ class _MealProfilePageState extends State<MealProfilePage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            CustomScrollView(slivers: <Widget>[
-              SliverAppBar(
-                backgroundColor: Colors.white,
-                expandedHeight: 200,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  background:
-                    ProfileImageBackDropAndLogo(
-                      backgroundImageUrl: 'images/Burger.jpg', showLogo: false,)),
-              ),
-              SliverList(
-                  delegate: SliverChildListDelegate([
+        child: CustomScrollView(slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            expandedHeight: 200,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background:
+                ProfileImageBackDropAndLogo(
+                  backgroundImageUrl: 'images/Burger.jpg', showLogo: false,)),
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Container(
+              margin: EdgeInsets.only(top: 2),
+              padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
+              child: Column(children: <Widget>[
+                ProfileDataPresenter(
+                  bigTitleName: _mealName,
+                  stringPrice: _stringPrice,
+                  description: _mealDescription,
+                  avgDeliveryTime: _avgDeliveryTime,
+                  deliveryFee: _deliveryFee),
+                SizedBox(height: 32),
                 Container(
-                  margin: EdgeInsets.only(top: 2),
-                  padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
-                  child: Column(children: <Widget>[
-                    ProfileDataPresenter(
-                      bigTitleName: _mealName,
-                      stringPrice: _stringPrice,
-                      description: _mealDescription,
-                      avgDeliveryTime: _avgDeliveryTime,
-                      deliveryFee: _deliveryFee),
-                    SizedBox(height: 32),
-                    Container(
-                      //Delivery Fee box container
-                      alignment: Alignment.centerLeft,
-                      child: Text("Extras", style: themeStyle.textTheme.subhead
-                              .copyWith(decoration: TextDecoration.underline)),
-                    ),
-                    checkboxExtrasTile(context),
-                    checkboxExtrasTile(context),
-                    checkboxExtrasTile(context),
-                    checkboxExtrasTile(context),
-                    checkboxExtrasTile(context),
-                    SizedBox(height: 60)
-                  ]),
+                  //Delivery Fee box container
+                  alignment: Alignment.centerLeft,
+                  child: Text("Extras", style: themeStyle.textTheme.subhead
+                          .copyWith(decoration: TextDecoration.underline)),
                 ),
-              ])),
-            ]),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: BottomButtons(price: 12.11),
+                checkboxExtrasTile(context),
+                checkboxExtrasTile(context),
+                checkboxExtrasTile(context),
+                checkboxExtrasTile(context),
+                checkboxExtrasTile(context),
+                SizedBox(height: 60)
+              ]),
             ),
-          ],
-        ),
+          ])),
+        ]),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: BottomButtons(price: 12.11),
     );
   }
 }
