@@ -47,48 +47,60 @@ class _MealProfilePageState extends State<MealProfilePage> {
 
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: Colors.white,
-            expandedHeight: 200,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background:
-                ProfileImageBackDropAndLogo(
-                  backgroundImageUrl: 'images/Burger.jpg', showLogo: false,)),
-          ),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Container(
-              margin: EdgeInsets.only(top: 2),
-              padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
-              child: Column(children: <Widget>[
-                ProfileDataPresenter(
-                  bigTitleName: _mealName,
-                  stringPrice: _stringPrice,
-                  description: _mealDescription,
-                  avgDeliveryTime: _avgDeliveryTime,
-                  deliveryFee: _deliveryFee),
-                SizedBox(height: 32),
-                Container(
-                  //Delivery Fee box container
-                  alignment: Alignment.centerLeft,
-                  child: Text("Extras", style: themeStyle.textTheme.subhead
-                          .copyWith(decoration: TextDecoration.underline)),
-                ),
-                checkboxExtrasTile(context),
-                checkboxExtrasTile(context),
-                checkboxExtrasTile(context),
-                checkboxExtrasTile(context),
-                checkboxExtrasTile(context),
-                SizedBox(height: 60)
-              ]),
-            ),
-          ])),
-        ]),
+        child: Stack(
+          children: <Widget>[
+            CustomScrollView(slivers: <Widget>[
+              SliverAppBar(
+                //backgroundColor: Colors.white,
+                elevation: 0,
+                expandedHeight: 200,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                    background:
+                    ProfileImageBackDropAndLogo(
+                      backgroundImageUrl: 'images/Burger.jpg',
+                      showLogo: false,)),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.only(top: 2),
+                    padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
+                    child: Column(children: <Widget>[
+                      ProfileDataPresenter(
+                          bigTitleName: _mealName,
+                          stringPrice: _stringPrice,
+                          description: _mealDescription,
+                          avgDeliveryTime: _avgDeliveryTime,
+                          deliveryFee: _deliveryFee),
+                      SizedBox(height: 32),
+                      Container(
+                        //Delivery Fee box container
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            "Extras", style: themeStyle.textTheme.subhead
+                            .copyWith(decoration: TextDecoration.underline)),
+                      ),
+                      checkboxExtrasTile(context),
+                      checkboxExtrasTile(context),
+                      checkboxExtrasTile(context),
+                      checkboxExtrasTile(context),
+                      checkboxExtrasTile(context),
+                    ]),
+                  ),
+                ]),
+              ),
+            ]),
+          ]
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: BottomButtons(price: 12.11),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){Navigator.of(context).pushNamed('/CartPage');},
+        child: Icon(Icons.shopping_cart),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+      bottomNavigationBar: BottomButtons(price: 12.11),
     );
   }
 }

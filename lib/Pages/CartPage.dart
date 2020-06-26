@@ -144,6 +144,34 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
+  Widget _feeRow(String amountName, double amount,
+      bool bold) {
+    final ThemeData themeStyle = Theme.of(context);
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 37),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            amountName,
+            style: !bold
+                ? themeStyle.textTheme.body1
+                : themeStyle.textTheme.body1
+                .copyWith(fontWeight: FontWeight.w700, fontSize: 16),
+          ),
+          Text(
+            "\$$amount",
+            style: !bold
+                ? themeStyle.textTheme.body1
+                : themeStyle.textTheme.body1
+                .copyWith(fontWeight: FontWeight.w700, fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _paymentExpansionSection(){
     return ExpansionTile(
       leading: Column(
@@ -293,34 +321,6 @@ class _CartPageState extends State<CartPage> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _feeRow(String amountName, double amount,
-      bool bold) {
-    final ThemeData themeStyle = Theme.of(context);
-
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 37),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            amountName,
-            style: !bold
-                ? themeStyle.textTheme.body1
-                : themeStyle.textTheme.body1
-                .copyWith(fontWeight: FontWeight.w700, fontSize: 16),
-          ),
-          Text(
-            "\$$amount",
-            style: !bold
-                ? themeStyle.textTheme.body1
-                : themeStyle.textTheme.body1
-                .copyWith(fontWeight: FontWeight.w700, fontSize: 16),
-          ),
-        ],
-      ),
     );
   }
 }

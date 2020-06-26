@@ -33,6 +33,7 @@ class _RestaurantProfilePageState extends State<RestaurantProfilePage>{
               backgroundColor: Colors.white,
               expandedHeight: 200,
               pinned: true,
+              elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
                   background: ProfileImageBackDropAndLogo(
                     backgroundImageUrl: 'images/Noodles.jpg',
@@ -44,6 +45,7 @@ class _RestaurantProfilePageState extends State<RestaurantProfilePage>{
             SliverList(
               delegate: SliverChildListDelegate([
                 Container(
+                  color: Colors.white,
                   margin: EdgeInsets.only(top: 2),
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   child: Column(
@@ -77,7 +79,16 @@ class _RestaurantProfilePageState extends State<RestaurantProfilePage>{
             )
           ]
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed('/CartPage');
+        },
+        child: Icon(Icons.shopping_cart),
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
+      ),
     );
   }
 }

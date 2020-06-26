@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Image.asset( "images/Logo.png", height: 45, width: 45),
         centerTitle: true,
+        elevation: 0,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
       drawer: standardDrawer(context),
       body: SafeArea(
         child: Container(
+          color: Colors.white,
           child: ListView(
             children: <Widget>[
               SizedBox(height: 24),
@@ -64,7 +66,14 @@ class _HomePageState extends State<HomePage> {
             ]
           )
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {Navigator.of(context).pushNamed('/CartPage');},
+        child: Icon(Icons.shopping_cart),
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
+      ),
     );
   }
 }

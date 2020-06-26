@@ -37,13 +37,7 @@ class _BottomButtonsState extends State<BottomButtons> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          gradient: LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.topCenter,
-              colors: <Color>[Color(0xFFFFFFEE), Color(0x00FFFFEE)])),
+      padding: EdgeInsets.only(bottom: 8),
       child: Row(
         children: <Widget>[
           SizedBox(width: 8),
