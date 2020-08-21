@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:chop_chop_flutter/Model/meal_item.dart';
 import 'package:chop_chop_flutter/UI_Elements/CardTypes.dart';
+import 'package:chop_chop_flutter/UI_Elements/PopArrowButton.dart';
 import 'package:chop_chop_flutter/UI_Elements/ProfilePageElements.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,9 @@ class RestaurantProfilePage extends StatefulWidget {
 
 class _RestaurantProfilePageState extends State<RestaurantProfilePage>{
   final String _restaurantName = "Yummy Joint";
-  final String _restaurantDescription = "Short description, 280 character limit, describing the restaurant. Great opportunity to convey a message to customers and students";
+  final String _restaurantDescription = "Short description, 280 character limit,"
+      " describing the restaurant. Great opportunity to convey a message to customers "
+      "and students";
   final String _deliveryTime = "Time: 30 mins";
   final String _deliveryFee = "Delivery Fee: GHs 1";
 
@@ -30,7 +33,8 @@ class _RestaurantProfilePageState extends State<RestaurantProfilePage>{
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              backgroundColor: Colors.white,
+              leading: PopArrowButton(),
+              backgroundColor: Colors.transparent,
               expandedHeight: 200,
               pinned: true,
               elevation: 0,

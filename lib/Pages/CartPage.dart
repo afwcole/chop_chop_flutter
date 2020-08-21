@@ -68,6 +68,8 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         title: Image.asset("images/Logo.png", height: 45, width: 45),
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: SafeArea(
           child: _ordersAdded ? _buildOrderListScreen() : _buildEmptyListScreen(),
@@ -85,6 +87,7 @@ class _CartPageState extends State<CartPage> {
 
   Widget _buildOrderListScreen(){
     return Container(
+      color: Colors.white,
       child: ListView(children: <Widget>[
         SizedBox(height: 24),
         title("My", "Order"),

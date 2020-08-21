@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
@@ -68,14 +69,14 @@ class _HomePageState extends State<HomePage> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {Navigator.of(context).pushNamed('/CartPage');},
+        backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.shopping_cart),
-        backgroundColor: Theme
-            .of(context)
-            .primaryColor,
+        onPressed: () {Navigator.of(context).pushNamed('/CartPage');},
       ),
     );
   }
+
+
 }
 
 

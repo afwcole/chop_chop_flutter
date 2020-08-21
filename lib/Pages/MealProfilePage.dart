@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:chop_chop_flutter/UI_Elements/BottomButtons.dart';
+import 'package:chop_chop_flutter/UI_Elements/PopArrowButton.dart';
 import 'package:chop_chop_flutter/UI_Elements/ProfilePageElements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +52,8 @@ class _MealProfilePageState extends State<MealProfilePage> {
           children: <Widget>[
             CustomScrollView(slivers: <Widget>[
               SliverAppBar(
-                //backgroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
+                leading: PopArrowButton(),
                 elevation: 0,
                 expandedHeight: 200,
                 pinned: true,
@@ -100,7 +102,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
         child: Icon(Icons.shopping_cart),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      bottomNavigationBar: BottomButtons(price: 12.11),
+      bottomNavigationBar: BottomButtons(price: 12.11)
     );
   }
 }
