@@ -76,14 +76,14 @@ class ProfileImageBackDropAndLogo extends StatelessWidget {
 
 class ProfileDataPresenter extends StatelessWidget {
   final String bigTitleName;
-  final String stringPrice;
+  final double basePrice;
   final String description;
   final String avgDeliveryTime;
   final String deliveryFee;
 
   ProfileDataPresenter({
     @required this.bigTitleName,
-    this.stringPrice,
+    this.basePrice,
     @required this.description,
     @required this.avgDeliveryTime,
     @required this.deliveryFee,
@@ -104,12 +104,12 @@ class ProfileDataPresenter extends StatelessWidget {
               child: Text(bigTitleName, style: themeStyle.textTheme.headline,),
             ),
             Visibility(
-              visible: stringPrice != null,
+              visible: basePrice != null,
               child: Container(
                 //Displays price
                 alignment: Alignment.centerRight,
                 child: Text(
-                  stringPrice == null ? " " : stringPrice,
+                  basePrice == null ? " " : "\$" + basePrice.toStringAsFixed(2),
                   style: themeStyle.textTheme.subhead
                       .copyWith(color: Color(0xFF535353)),
                 ),

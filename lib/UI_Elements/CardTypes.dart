@@ -182,7 +182,7 @@ class MealCard extends StatelessWidget{
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(0, 16, 16, 16),
-                      child: Text("\$$price",
+                      child: Text("\$" + price.toStringAsFixed(2),
                         style: Theme.of(context).textTheme.display1,
                       ),
                     ),
@@ -254,7 +254,7 @@ class ColumnCard extends StatelessWidget{
                 ),
                 Container(
                   margin: EdgeInsets.only(right: 16),
-                  child: Text("\$$price",
+                  child: Text("\$" + price.toStringAsFixed(2),
                     style: Theme.of(context).textTheme.subhead,
                   ),
                 ),]
@@ -338,7 +338,7 @@ class MealCardTile extends StatelessWidget{
             Container(
               margin: EdgeInsets.only(left: 4, right: 16),
               child: Text(
-                "\$$price",
+                  "\$" + price.toStringAsFixed(2),
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600

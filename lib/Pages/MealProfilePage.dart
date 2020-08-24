@@ -18,11 +18,12 @@ class MealProfilePage extends StatefulWidget {
 class _MealProfilePageState extends State<MealProfilePage> {
   bool checkedValue = true;
   final String _mealName = "Beef Burger";
-  final String _stringPrice = "\$12.11";
+  final double _mealBasePrice = 12;
   final String _mealDescription =
       "Short description, 280 character limit, describing the meal and all the ingredients involved. Opportunity to convey a message to customers and sell the product";
   final String _avgDeliveryTime = "Time: 30 mins";
   final String _deliveryFee = "Delivery Fee: Ghs 1";
+  double _extrasPrice = 3.6;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
             .of(context)
             .primaryColor,
         title: Text("Sweet Potato Chips", style: themeStyle.textTheme.body1),
-        subtitle: Text("\$3.50",
+        subtitle: Text("\$" + _extrasPrice.toStringAsFixed(2),
             style: themeStyle.textTheme.body1.copyWith(color: Color(0xFF535353))),
         value: checkedValue,
         onChanged: (newValue) {
@@ -72,7 +73,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                     child: Column(children: <Widget>[
                       ProfileDataPresenter(
                           bigTitleName: _mealName,
-                          stringPrice: _stringPrice,
+                          basePrice: _mealBasePrice,
                           description: _mealDescription,
                           avgDeliveryTime: _avgDeliveryTime,
                           deliveryFee: _deliveryFee),
