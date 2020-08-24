@@ -4,19 +4,10 @@ import 'package:chop_chop_flutter/Model/meal_item.dart';
 import 'package:chop_chop_flutter/UI_Elements/CardTypes.dart';
 import 'package:chop_chop_flutter/UI_Elements/PopArrowButton.dart';
 import 'package:chop_chop_flutter/UI_Elements/ProfilePageElements.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class RestaurantProfilePage extends StatefulWidget {
-  RestaurantProfilePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _RestaurantProfilePageState createState() => _RestaurantProfilePageState();
-}
-
-class _RestaurantProfilePageState extends State<RestaurantProfilePage>{
+class RestaurantProfilePage extends StatelessWidget{
   final String _restaurantName = "Yummy Joint";
   final String _restaurantDescription = "Short description, 280 character limit,"
       " describing the restaurant. Great opportunity to convey a message to customers "

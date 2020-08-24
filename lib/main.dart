@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chop Chop',
       theme: basicTheme(),
-      home: HomePage(title: 'Chop Chop'),
+      home: HomePage(),
       routes: <String, WidgetBuilder>{
         '/RestaurantProfilePage': (BuildContext context) => RestaurantProfilePage(),
         '/MealProfilePage': (BuildContext context) => MealProfilePage(),
