@@ -18,7 +18,7 @@ class _CartPageState extends State<CartPage> {
   String mealName = "Beef Burger";
   String restaurantName = "BBQ City";
   double price = 15.99;
-  double subtotal = 49.99;
+  double subtotal = 49;
   double deliveryFee = 1;
   double total;
   String deliveryLocation = "25B Brunei";
@@ -105,8 +105,7 @@ class _CartPageState extends State<CartPage> {
           },
         ),
         SizedBox(height: 24),
-        Divider(
-          color: Colors.grey, thickness: 1, indent: 24, endIndent: 24,),
+        Divider(color: Colors.grey, thickness: 1, indent: 24, endIndent: 24,),
         _feeRow("Subtotal", subtotal, false),
         SizedBox(height: 8),
         _feeRow("Delivery Fee", deliveryFee, false),
@@ -147,8 +146,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  Widget _feeRow(String amountName, double amount,
-      bool bold) {
+  Widget _feeRow(String amountName, double amount, bool bold) {
     final ThemeData themeStyle = Theme.of(context);
 
     return Container(
@@ -164,7 +162,7 @@ class _CartPageState extends State<CartPage> {
                 .copyWith(fontWeight: FontWeight.w700, fontSize: 16),
           ),
           Text(
-            "\$$amount",
+            "\$${amount.toStringAsFixed(2)}",
             style: !bold
                 ? themeStyle.textTheme.body1
                 : themeStyle.textTheme.body1

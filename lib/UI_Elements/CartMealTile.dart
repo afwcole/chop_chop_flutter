@@ -135,8 +135,7 @@ class CartMealTile extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(left: 4),
               child: Text(
-                "\$$price",
-                textDirection: TextDirection.rtl,
+                "\$${price.toStringAsFixed(2)}",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),

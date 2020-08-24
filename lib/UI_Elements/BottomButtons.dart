@@ -92,7 +92,7 @@ class _BottomButtonsState extends State<BottomButtons> {
       ),
       onPressed: () {},
       child: Text(
-        "Add \$ $_displayFinalPrice",
+        "Add  \$${_displayFinalPrice.toStringAsFixed(2)}",
         style: Theme.of(context).textTheme.button,
       ),
     );
