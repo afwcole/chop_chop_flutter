@@ -1,6 +1,6 @@
 import 'package:chop_chop_flutter/Model/meal_item.dart';
 import 'package:flutter/material.dart';
-import 'CardTypes.dart';
+import 'card_types.dart';
 
 class CategoryDeck extends StatelessWidget{
   @override

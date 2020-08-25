@@ -109,7 +109,7 @@ class ProfileDataPresenter extends StatelessWidget {
                 //Displays price
                 alignment: Alignment.centerRight,
                 child: Text(
-                  basePrice == null ? " " : "\$" + basePrice.toStringAsFixed(2),
+                  basePrice == null ? " " : "\$${basePrice.toStringAsFixed(2)}",
                   style: themeStyle.textTheme.subhead
                       .copyWith(color: Color(0xFF535353)),
                 ),

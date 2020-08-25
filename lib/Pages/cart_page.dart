@@ -1,10 +1,10 @@
-import 'package:chop_chop_flutter/UI_Elements/CartMealTile.dart';
+import 'package:chop_chop_flutter/UI_Elements/cart_meal_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:chop_chop_flutter/Model/meal_item.dart';
 
-import 'HomePage.dart';
+import 'home_page.dart';
 
 class CartPage extends StatefulWidget {
   CartPage({Key key, this.title}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:chop_chop_flutter/UI_Elements/BottomButtons.dart';
-import 'package:chop_chop_flutter/UI_Elements/PopArrowButton.dart';
-import 'package:chop_chop_flutter/UI_Elements/ProfilePageElements.dart';
+import 'package:chop_chop_flutter/UI_Elements/bottom_buttons.dart';
+import 'package:chop_chop_flutter/UI_Elements/pop_arrow_button.dart';
+import 'package:chop_chop_flutter/UI_Elements/profile_page_elements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';

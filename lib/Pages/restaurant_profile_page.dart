@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:chop_chop_flutter/Model/meal_item.dart';
-import 'package:chop_chop_flutter/UI_Elements/CardTypes.dart';
-import 'package:chop_chop_flutter/UI_Elements/PopArrowButton.dart';
-import 'package:chop_chop_flutter/UI_Elements/ProfilePageElements.dart';
+import 'package:chop_chop_flutter/UI_Elements/card_types.dart';
+import 'package:chop_chop_flutter/UI_Elements/pop_arrow_button.dart';
+import 'package:chop_chop_flutter/UI_Elements/profile_page_elements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 

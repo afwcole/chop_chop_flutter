@@ -1,6 +1,6 @@
 import 'package:chop_chop_flutter/Model/meal_item.dart';
-import 'package:chop_chop_flutter/UI_Elements/CardTypes.dart';
-import 'package:chop_chop_flutter/UI_Elements/Decks.dart';
+import 'package:chop_chop_flutter/UI_Elements/card_types.dart';
+import 'package:chop_chop_flutter/UI_Elements/decks.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

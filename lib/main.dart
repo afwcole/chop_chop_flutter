@@ -1,10 +1,10 @@
-import 'package:chop_chop_flutter/Pages/RestaurantProfilePage.dart';
+import 'package:chop_chop_flutter/Pages/restaurant_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Pages/CartPage.dart';
-import 'Pages/HomePage.dart';
-import 'Pages/MealProfilePage.dart';
+import 'Pages/cart_page.dart';
+import 'Pages/home_page.dart';
+import 'Pages/meal_profile_page.dart';
 import 'Theme.dart';
 
 void main() => runApp(MyApp());
