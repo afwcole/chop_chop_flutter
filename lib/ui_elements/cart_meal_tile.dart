@@ -1,19 +1,15 @@
+import 'package:chop_chop_flutter/Model/meal_item.dart';
+import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 
 class CartMealTile extends StatelessWidget {
-
-  final String mealName;
-  final String restaurantName;
-  final double price;
-  final int qty;
+  final MealItem mealItem;
 
   CartMealTile({
-    @required this.mealName,
-    @required this.restaurantName,
-    @required this.price,
-    @required this.qty,
+    @required this.mealItem,
   });
 
   @override
@@ -23,6 +19,12 @@ class CartMealTile extends StatelessWidget {
         .of(context)
         .size
         .width * 0.35;
+
+    var cartProvider = Provider.of<CartProvider>(context);
+    String mealName = mealItem.mealName;
+    String restaurantName = mealItem.restaurantName;
+    double price = mealItem.price;
+    int qty = 3;
 
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -34,9 +36,11 @@ class CartMealTile extends StatelessWidget {
           iconWidget: Builder(
             builder: (context) =>
                 RawMaterialButton(
-                  onPressed: () =>
+                  onPressed: () {
                       Scaffold.of(context).showSnackBar(
-                          new SnackBar(content: Text("Edit"))),
+                          new SnackBar(content: Text("Edit")));
+                      Slidable.of(context).close();
+                  },
                   elevation: 1.0,
                   fillColor: Colors.white30,
                   child: Icon(
@@ -54,10 +58,15 @@ class CartMealTile extends StatelessWidget {
             builder: (context) =>
                 RawMaterialButton(
                   onPressed: () {
+                    Slidable.of(context).close();
+                    cartProvider.removeFromCartList(mealItem);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text("Delete"),
-                        action: SnackBarAction(label: "Undo", onPressed: () {},)));
+                        duration: Duration(seconds: 1),
+                        action: SnackBarAction(label: "Undo", onPressed: () {
+                          return cartProvider.addToCartList(mealItem);
+                        },)));
                   },
                   elevation: 1.0,
                   fillColor: Colors.red,
