@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'model/meal_item.dart';
+import 'data_model/meal_item.dart';
 
 class DataSearch extends SearchDelegate<String> {
 

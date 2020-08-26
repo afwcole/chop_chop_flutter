@@ -1,10 +1,10 @@
-import 'package:chop_chop_flutter/model/meal_item.dart';
-import 'package:chop_chop_flutter/ui_elements/cards/column_card.dart';
-import 'package:chop_chop_flutter/ui_elements/decks/category_card_deck.dart';
-import 'package:chop_chop_flutter/ui_elements/decks/meal_card_deck.dart';
-import 'package:chop_chop_flutter/ui_elements/decks/restaurant_card_deck.dart';
-import 'package:chop_chop_flutter/ui_elements/standard_drawer.dart';
-import 'package:chop_chop_flutter/ui_elements/title.dart';
+import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/screen_elements/cards/column_card.dart';
+import 'package:chop_chop_flutter/screen_elements/card_decks/category_card_deck.dart';
+import 'package:chop_chop_flutter/screen_elements/card_decks/meal_card_deck.dart';
+import 'package:chop_chop_flutter/screen_elements/card_decks/restaurant_card_deck.dart';
+import 'package:chop_chop_flutter/screen_elements/standard_drawer.dart';
+import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/screen_elements/title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

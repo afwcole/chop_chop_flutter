@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/model/meal_item.dart';
+import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
 import 'package:flutter/material.dart';
 
 class ColumnCard extends StatelessWidget {

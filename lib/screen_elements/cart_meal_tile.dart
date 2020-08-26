@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/Model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
