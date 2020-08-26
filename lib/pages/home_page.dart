@@ -1,10 +1,10 @@
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/screen_elements/cards/column_card.dart';
 import 'package:chop_chop_flutter/screen_elements/card_decks/category_card_deck.dart';
 import 'package:chop_chop_flutter/screen_elements/card_decks/meal_card_deck.dart';
 import 'package:chop_chop_flutter/screen_elements/card_decks/restaurant_card_deck.dart';
 import 'package:chop_chop_flutter/screen_elements/standard_drawer.dart';
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/screen_elements/title.dart';
+import 'package:chop_chop_flutter/screen_elements/title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               Container(
                 child: Column(
                   children: <Widget>[
-                    for(var mealItem in mealItemList.mealItems)
+                    for(MealItem mealItem in mealItemList.mealItems)
                       ColumnCard(mealItem: mealItem),
                   ],
                 ),

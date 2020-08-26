@@ -1,4 +1,4 @@
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/screen_elements/cards/meal_card.dart';
 import 'package:flutter/material.dart';
 

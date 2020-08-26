@@ -1,23 +1,18 @@
 import 'dart:ui';
 
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/screen_elements/cards/meal_card_tile.dart';
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/screen_elements/header_and_logo.dart';
+import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
+import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class RestaurantProfilePage extends StatelessWidget{
-  final String _restaurantName = "Yummy Joint";
-  final String _restaurantDescription = "Short description, 280 character limit,"
-      " describing the restaurant. Great opportunity to convey a message to customers "
-      "and students";
-  final int _deliveryTime = 30;
-  final int _deliveryFee = 1;
-
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
+    RestaurantItem _restaurantItem = restaurantItemList.restaurantItems[0];
 
     return Scaffold(
       body: SafeArea(
@@ -31,8 +26,8 @@ class RestaurantProfilePage extends StatelessWidget{
               elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
                   background: HeaderAndLogo(
-                    backgroundImageUrl: 'images/Noodles.jpg',
-                    logoImageUrl: 'images/Logo.png',
+                    headerImageUrl: _restaurantItem.restaurantHeaderImage,
+                    logoImageUrl: _restaurantItem.restaurantLogo,
                     showLogo: true,
                   ),
               ),
@@ -45,12 +40,7 @@ class RestaurantProfilePage extends StatelessWidget{
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   child: Column(
                     children: <Widget>[
-//                      DisplayRestaurantInfo(
-//                        bigTitleName: _restaurantName,
-//                        description: _restaurantDescription,
-//                        deliveryFee: _deliveryFee,
-//                        estDeliveryTime: _deliveryTime,
-//                      ),
+                      DisplayRestaurantInfo(restaurantItem: _restaurantItem,),
                       SizedBox(height: 32),
                       Container( //Delivery Fee box container
                         alignment: Alignment.centerLeft,
@@ -60,7 +50,7 @@ class RestaurantProfilePage extends StatelessWidget{
                       ),
                       SizedBox(height: 24),
                       for(int index = 0; index < 4; index++)
-                        MealCardTile(mealItem: mealItemList.mealItems[index]),
+                        MealCardTile(mealItem: _restaurantItem.restaurantMenu[index]),
                     ],
                   ),
                 )

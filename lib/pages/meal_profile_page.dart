@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/bottom_buttons.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/screen_elements/display_restaurant_info.dart';
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/screen_elements/header_and_logo.dart';
+import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
+import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -18,8 +18,8 @@ class MealProfilePage extends StatefulWidget {
 }
 
 class _MealProfilePageState extends State<MealProfilePage> {
-  MealItem mealItem = mealItemList.mealItems[1];
-  bool checkedValue = true;
+  MealItem _mealItem = mealItemList.mealItems[1];
+  bool _checkedValue = true;
   double _extrasPrice = 3.6;
 
   @override
@@ -34,10 +34,10 @@ class _MealProfilePageState extends State<MealProfilePage> {
         title: Text("Sweet Potato Chips", style: themeStyle.textTheme.body1),
         subtitle: Text("\$" + _extrasPrice.toStringAsFixed(2),
             style: themeStyle.textTheme.body1.copyWith(color: Color(0xFF535353))),
-        value: checkedValue,
+        value: _checkedValue,
         onChanged: (newValue) {
           setState(() {
-            checkedValue = newValue;
+            _checkedValue = newValue;
           });
         },
         controlAffinity: ListTileControlAffinity.leading,
@@ -58,7 +58,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                 flexibleSpace: FlexibleSpaceBar(
                     background:
                     HeaderAndLogo(
-                      backgroundImageUrl: mealItem.mealImage,
+                      headerImageUrl: _mealItem.mealImage,
                       showLogo: false,)),
               ),
               SliverList(
@@ -68,7 +68,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                     margin: EdgeInsets.only(top: 2),
                     padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
                     child: Column(children: <Widget>[
-                      DisplayRestaurantInfo(mealItem: mealItem),
+                      DisplayRestaurantInfo(mealItem: _mealItem),
                       SizedBox(height: 32),
                       Container(
                         //Delivery Fee box container
@@ -95,7 +95,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
         child: Icon(Icons.shopping_cart),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      bottomNavigationBar: BottomButtons(price: 12.11)
+      bottomNavigationBar: BottomButtons(price: _mealItem.mealBasePrice)
     );
   }
 }

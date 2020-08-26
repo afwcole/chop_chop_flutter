@@ -4,7 +4,7 @@ import 'data_model/meal_item.dart';
 
 class DataSearch extends SearchDelegate<String> {
 
-  final recentSearches = [
+  List<MealItem> _recentSearches = [
     mealItemList.mealItems[1],
     mealItemList.mealItems[6],
     mealItemList.mealItems[3],
@@ -45,7 +45,7 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     //show when user searches for something
     final suggestionList = query.isEmpty
-        ? recentSearches
+        ? _recentSearches
         : mealItemList.mealItems;
 
     return ListView.builder(

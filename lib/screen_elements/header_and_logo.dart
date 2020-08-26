@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class HeaderAndLogo extends StatelessWidget {
-  final String backgroundImageUrl;
+  final String headerImageUrl;
   final bool showLogo;
   final String logoImageUrl;
 
   HeaderAndLogo({
-    @required this.backgroundImageUrl,
+    @required this.headerImageUrl,
     this.logoImageUrl,
     @required this.showLogo,
   });
@@ -26,7 +26,7 @@ class HeaderAndLogo extends StatelessWidget {
                 .of(context)
                 .size
                 .width,
-            child: Image.asset(backgroundImageUrl, fit: BoxFit.cover,),
+            child: Image.asset(headerImageUrl, fit: BoxFit.cover,),
           ),
           Visibility(
             visible: showLogo,

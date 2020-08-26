@@ -27,7 +27,7 @@ class _BottomButtonsState extends State<BottomButtons> {
 
   void _decrementCounter() {
     setState(() {
-      if (_counter != 1) {
+      if (_counter != 0) {
         _counter--;
         _displayFinalPrice = mealPrice * _counter;
       }

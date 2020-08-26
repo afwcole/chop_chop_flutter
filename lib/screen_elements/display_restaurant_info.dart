@@ -1,22 +1,39 @@
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DisplayRestaurantInfo extends StatelessWidget {
   final MealItem mealItem;
+  final RestaurantItem restaurantItem;
 
   DisplayRestaurantInfo({
-    @required this.mealItem,
+    this.mealItem,
+    this.restaurantItem,
   });
 
   @override
   Widget build(BuildContext context) {
     ThemeData themeStyle = Theme.of(context);
-    String bigTitleName = mealItem.mealName;
-    double basePrice = mealItem.mealBasePrice;
-    String description = mealItem.mealDescription;
-    int estDeliveryTime = mealItem.estimatedDeliveryTime;
-    int deliveryFee = mealItem.deliveryFee;
+    String bigTitleName;
+    double basePrice;
+    String description;
+    int estDeliveryTime;
+    int deliveryFee;
+
+    if (mealItem != null){
+      bigTitleName = mealItem.mealName;
+      basePrice = mealItem.mealBasePrice;
+      description = mealItem.mealDescription;
+      estDeliveryTime = mealItem.estimatedDeliveryTime;
+      deliveryFee = mealItem.deliveryFee;
+    }
+    else{
+      bigTitleName = restaurantItem.restaurantName;
+      description = restaurantItem.restaurantDescription;
+      estDeliveryTime = restaurantItem.estimatedDeliveryTime;
+      deliveryFee = restaurantItem.deliveryFee;
+    }
 
     return Column(
       children: <Widget>[
@@ -31,7 +48,6 @@ class DisplayRestaurantInfo extends StatelessWidget {
             Visibility(
               visible: basePrice != null,
               child: Container(
-                //Displays price
                 alignment: Alignment.centerRight,
                 child: Text(
                   basePrice == null ? " " : "\$${basePrice.toStringAsFixed(2)}",
@@ -44,7 +60,6 @@ class DisplayRestaurantInfo extends StatelessWidget {
         ),
         SizedBox(height: 8),
         Container(
-          //Description section
           alignment: Alignment.centerLeft,
           child: Text(description, style: themeStyle.textTheme.body1,),
         ),
@@ -52,7 +67,6 @@ class DisplayRestaurantInfo extends StatelessWidget {
         Row(
           children: <Widget>[
             Container(
-              //Delivery Time box container
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(color: Color(0x80C2791A)),
@@ -61,7 +75,6 @@ class DisplayRestaurantInfo extends StatelessWidget {
             ),
             SizedBox(width: 12),
             Container(
-              //Delivery Fee box container
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(color: Color(0x80C2791A)),
