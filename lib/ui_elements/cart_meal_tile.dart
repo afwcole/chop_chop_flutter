@@ -23,7 +23,7 @@ class CartMealTile extends StatelessWidget {
     var cartProvider = Provider.of<CartProvider>(context);
     String mealName = mealItem.mealName;
     String restaurantName = mealItem.restaurantName;
-    double price = mealItem.price;
+    double price = mealItem.mealBasePrice;
     int qty = 3;
 
     return Slidable(

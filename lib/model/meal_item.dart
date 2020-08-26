@@ -1,99 +1,112 @@
 import 'package:flutter/foundation.dart';
 
+final String _mealDescription =
+    """Short description, 280 character limit, describing the meal and all the 
+    ingredients involved. Opportunity to convey a message to customers 
+    and sell the product""";
 
-MealItemList mealItemList = MealItemList(
-    mealItems: [
-      MealItem(
-          id: 1,
-          mealName: "Beef Burger",
-          restaurantName: "BBQ City",
-          price: 15.00,
-          imgUrl: 'images/Burger.jpg'
-      ),
-      MealItem(
-          id: 2,
-          mealName: "Gretaben",
-          restaurantName: "PizzaMan",
-          price: 50.00,
-          imgUrl: 'images/Noodles.jpg'
-      ),
-      MealItem(
-          id: 3,
-          mealName: "Pork Fried Rice",
-          restaurantName: "Brunei Cafeteria",
-          price: 13.00,
-          imgUrl: 'images/Rice.jpg'
-      ),
-      MealItem(
-          id: 4,
-          mealName: "Jollof with Beef",
-          restaurantName: "Sweet Mummy's",
-          price: 16.00,
-          imgUrl: 'images/Rice.jpg'
-      ),
-      MealItem(
-          id: 5,
-          mealName: "Fried Rice & Beef Sauce",
-          restaurantName: "Husband and Wife",
-          price: 16.00,
-          imgUrl: 'images/Rice.jpg'
-      ),
-      MealItem(
-          id: 6,
-          mealName: "BBQ Chicken Wings & Sweet Potato Fries",
-          restaurantName: "BBQ City",
-          price: 25.00,
-          imgUrl: 'images/Chicken.jfif'
-      ),
-      MealItem(
-          id: 7,
-          mealName: "Fried Chicken & Yam Chips",
-          restaurantName: "Mr. Roberts",
-          price: 12.00,
-          imgUrl: 'images/Chicken.jfif'
-      ),
-      MealItem(
-          id: 8,
-          mealName: "Pork & Fried Yam",
-          restaurantName: "Acuzzi",
-          price: 8.00,
-          imgUrl: 'images/Rice.jpg'
-      ),
-      MealItem(
-          id: 9,
-          mealName: "Jollof & Chicken",
-          restaurantName: "Sanbra",
-          price: 8.00,
-          imgUrl: 'images/Rice.jpg'
-      ),
-      MealItem(
-          id: 10,
-          mealName: "Fried Chicken & Yam Chips",
-          restaurantName: "Mr. Roberts",
-          price: 12.00,
-          imgUrl: 'images/Rice.jpg'
-      ),
-    ]
-);
+MealItemList mealItemList = MealItemList(mealItems: [
+  MealItem(
+      id: 1,
+      mealName: "Beef Burger",
+      restaurantName: "BBQ City",
+      mealBasePrice: 15.00,
+      mealImage: 'images/Burger.jpg',
+      mealDescription: _mealDescription,
+      estimatedDeliveryTime: 35,
+      deliveryFee: 1),
+  MealItem(
+      id: 2,
+      mealName: "Gretaben",
+      restaurantName: "PizzaMan",
+      mealBasePrice: 45.00,
+      mealImage: 'images/Noodles.jpg',
+      mealDescription: _mealDescription,
+      estimatedDeliveryTime: 30,
+      deliveryFee: 2),
+  MealItem(
+      id: 3,
+      mealName: "Pork Fried Rice",
+      restaurantName: "Brunei Cafeteria",
+      mealBasePrice: 13.00,
+      mealImage: 'images/Rice.jpg',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 4,
+      mealName: "Jollof with Beef",
+      restaurantName: "Sweet Mummy's",
+      mealBasePrice: 16.00,
+      mealImage: 'images/Rice.jpg',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 5,
+      mealName: "Fried Rice & Beef Sauce",
+      restaurantName: "Husband and Wife",
+      mealBasePrice: 16.00,
+      mealImage: 'images/Rice.jpg',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 6,
+      mealName: "BBQ Chicken Wings & Sweet Potato Fries",
+      restaurantName: "BBQ City",
+      mealBasePrice: 25.00,
+      mealImage: 'images/Chicken.jfif',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 7,
+      mealName: "Fried Chicken & Yam Chips",
+      restaurantName: "Mr. Roberts",
+      mealBasePrice: 12.00,
+      mealImage: 'images/Chicken.jfif',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 8,
+      mealName: "Pork & Fried Yam",
+      restaurantName: "Acuzzi",
+      mealBasePrice: 8.00,
+      mealImage: 'images/Rice.jpg',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 9,
+      mealName: "Jollof & Chicken",
+      restaurantName: "Sanbra",
+      mealBasePrice: 8.00,
+      mealImage: 'images/Rice.jpg',
+      mealDescription: _mealDescription,),
+  MealItem(
+      id: 10,
+      mealName: "Fried Chicken & Yam Chips",
+      restaurantName: "Mr. Roberts",
+      mealBasePrice: 12.00,
+      mealImage: 'images/Rice.jpg',
+      mealDescription: _mealDescription,),
+]);
 
 class MealItemList {
   List<MealItem> mealItems; // A list of meal item from the class above
 
-  MealItemList({@required this.mealItems}); //requires the mealItems list line above
+  MealItemList(
+      {@required this.mealItems}); //requires the mealItems list line above
 }
 
-class MealItem{
-  int id;
-  String mealName;
-  String restaurantName;
-  double price;
-  String imgUrl;
+class MealItem {
+  final int id;
+  final String mealImage;
+  final String mealName;
+  final double mealBasePrice;
+  final String mealDescription;
+  final String restaurantName;
+  final int estimatedDeliveryTime;
+  final int deliveryFee;
 
   MealItem({
     @required this.id,
+    @required this.mealImage,
     @required this.mealName,
-    @required this.restaurantName,
-    @required this.price,
-    @required this.imgUrl
+    @required this.mealBasePrice,
+    @required this.mealDescription,
+    this.restaurantName,
+    this.estimatedDeliveryTime,
+    this.deliveryFee,
   });
 }

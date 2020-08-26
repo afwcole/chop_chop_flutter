@@ -72,7 +72,7 @@ class CartProvider with ChangeNotifier {
 
   double getSubtotal(){
     double subtotal = 0;
-    for (var item in _cartList) subtotal += item.price;
+    for (var item in _cartList) subtotal += item.mealBasePrice;
     return subtotal;
   }
 }

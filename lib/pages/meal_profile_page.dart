@@ -1,8 +1,10 @@
 import 'dart:ui';
 
-import 'package:chop_chop_flutter/UI_Elements/bottom_buttons.dart';
-import 'package:chop_chop_flutter/UI_Elements/pop_arrow_button.dart';
-import 'package:chop_chop_flutter/UI_Elements/profile_page_elements.dart';
+import 'package:chop_chop_flutter/model/meal_item.dart';
+import 'package:chop_chop_flutter/ui_elements/buttons/bottom_buttons.dart';
+import 'package:chop_chop_flutter/ui_elements/buttons/pop_arrow_button.dart';
+import 'package:chop_chop_flutter/ui_elements/display_restaurant_info.dart';
+import 'package:chop_chop_flutter/ui_elements/header_and_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -16,13 +18,8 @@ class MealProfilePage extends StatefulWidget {
 }
 
 class _MealProfilePageState extends State<MealProfilePage> {
+  MealItem mealItem = mealItemList.mealItems[1];
   bool checkedValue = true;
-  final String _mealName = "Beef Burger";
-  final double _mealBasePrice = 12;
-  final String _mealDescription =
-      "Short description, 280 character limit, describing the meal and all the ingredients involved. Opportunity to convey a message to customers and sell the product";
-  final String _avgDeliveryTime = "Time: 30 mins";
-  final String _deliveryFee = "Delivery Fee: Ghs 1";
   double _extrasPrice = 3.6;
 
   @override
@@ -60,8 +57,8 @@ class _MealProfilePageState extends State<MealProfilePage> {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                     background:
-                    ProfileImageBackDropAndLogo(
-                      backgroundImageUrl: 'images/Burger.jpg',
+                    HeaderAndLogo(
+                      backgroundImageUrl: mealItem.mealImage,
                       showLogo: false,)),
               ),
               SliverList(
@@ -71,12 +68,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                     margin: EdgeInsets.only(top: 2),
                     padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
                     child: Column(children: <Widget>[
-                      ProfileDataPresenter(
-                          bigTitleName: _mealName,
-                          basePrice: _mealBasePrice,
-                          description: _mealDescription,
-                          avgDeliveryTime: _avgDeliveryTime,
-                          deliveryFee: _deliveryFee),
+                      DisplayRestaurantInfo(mealItem: mealItem),
                       SizedBox(height: 32),
                       Container(
                         //Delivery Fee box container
@@ -107,4 +99,3 @@ class _MealProfilePageState extends State<MealProfilePage> {
     );
   }
 }
-
