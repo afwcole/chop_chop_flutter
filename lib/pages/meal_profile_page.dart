@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/screen_elements/CheckboxExtrasTile.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/bottom_buttons.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
@@ -8,6 +10,7 @@ import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:grouped_buttons/grouped_buttons.dart';
 
 class MealProfilePage extends StatefulWidget {
   MealProfilePage({Key key, this.title}) : super(key: key);
@@ -19,30 +22,20 @@ class MealProfilePage extends StatefulWidget {
 
 class _MealProfilePageState extends State<MealProfilePage> {
   MealItem _mealItem = mealItemList.mealItems[1];
-  bool _checkedValue = true;
-  double _extrasPrice = 3.6;
+  List<ExtrasItem> _selectedExtras = [];
+
+  List<ExtrasItem> getSelectedExtras(List<String> checked){
+    List<ExtrasItem> temp = [];
+    for (var i = 0; i < _mealItem.extrasList.length; i++) {
+      if (checked.contains(_mealItem.extrasList[i].extrasName))
+        temp.add(_mealItem.extrasList[i]);
+    }
+    return temp;
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
-
-    Widget checkboxExtrasTile(BuildContext context) {
-      return CheckboxListTile(
-        activeColor: Theme
-            .of(context)
-            .primaryColor,
-        title: Text("Sweet Potato Chips", style: themeStyle.textTheme.body1),
-        subtitle: Text("\$" + _extrasPrice.toStringAsFixed(2),
-            style: themeStyle.textTheme.body1.copyWith(color: Color(0xFF535353))),
-        value: _checkedValue,
-        onChanged: (newValue) {
-          setState(() {
-            _checkedValue = newValue;
-          });
-        },
-        controlAffinity: ListTileControlAffinity.leading,
-      );
-    }
 
     return Scaffold(
       body: SafeArea(
@@ -71,17 +64,22 @@ class _MealProfilePageState extends State<MealProfilePage> {
                       DisplayRestaurantInfo(mealItem: _mealItem),
                       SizedBox(height: 32),
                       Container(
-                        //Delivery Fee box container
                         alignment: Alignment.centerLeft,
                         child: Text(
                             "Extras", style: themeStyle.textTheme.subhead
                             .copyWith(decoration: TextDecoration.underline)),
                       ),
-                      checkboxExtrasTile(context),
-                      checkboxExtrasTile(context),
-                      checkboxExtrasTile(context),
-                      checkboxExtrasTile(context),
-                      checkboxExtrasTile(context),
+                      CheckboxGroup(
+                        activeColor: Theme.of(context).primaryColor,
+                        onChange: ((bool isChecked, String label, int index) {}),
+                        onSelected: ((List<String> checked) {
+                          _selectedExtras = getSelectedExtras(checked);
+                        }),
+                        labels: _mealItem.listExtrasNames(),
+                        itemBuilder: (Checkbox cb, Text  text, int index){
+                          return CheckboxExtrasTile(checkbox: cb, text: text, price: _mealItem.extrasList[index].extrasPrice);
+                        },
+                      ),
                     ]),
                   ),
                 ]),
@@ -91,7 +89,9 @@ class _MealProfilePageState extends State<MealProfilePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){Navigator.of(context).pushNamed('/CartPage');},
+        onPressed: ((){
+          Navigator.of(context).pushNamed('/CartPage');
+        }),
         child: Icon(Icons.shopping_cart),
         backgroundColor: Theme.of(context).primaryColor,
       ),

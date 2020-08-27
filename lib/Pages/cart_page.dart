@@ -10,7 +10,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cartProvider = Provider.of<CartProvider>(context);
+    var _cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -20,13 +20,13 @@ class CartPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-        child: cartProvider.cartList.length != 0
+        child: _cartProvider.cartList.length != 0
             ? _buildCartListScreen(context)
             : _buildEmptyCartListScreen(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton:
-          cartProvider.cartList.length != 0 ? _checkoutButton() : null,
+          _cartProvider.cartList.length != 0 ? _checkoutButton() : null,
     );
   }
 
@@ -37,10 +37,10 @@ class CartPage extends StatelessWidget {
   }
 
   Widget _buildCartListScreen(BuildContext context) {
-    var cartProvider = Provider.of<CartProvider>(context);
-    double subtotal = cartProvider.getSubtotal();
-    double deliveryFee = 1;
-    double total = subtotal + deliveryFee;
+    var _cartProvider = Provider.of<CartProvider>(context);
+    double _subtotal = _cartProvider.getSubtotal();
+    double _deliveryFee = 1;
+    double _total = _subtotal + _deliveryFee;
 
     return Container(
       color: Colors.white,
@@ -51,9 +51,9 @@ class CartPage extends StatelessWidget {
         ListView.separated(
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
-          itemCount: cartProvider.cartList.length,
+          itemCount: _cartProvider.cartList.length,
           itemBuilder: (context, index) {
-            return CartMealTile(mealItem: cartProvider.cartList[index]);
+            return CartMealTile(mealItem: _cartProvider.cartList[index]);
           },
           separatorBuilder: (BuildContext context, int index) {
             return Divider(
@@ -71,11 +71,11 @@ class CartPage extends StatelessWidget {
           indent: 24,
           endIndent: 24,
         ),
-        _feeRow(context, "Subtotal", cartProvider.getSubtotal(), false),
+        _feeRow(context, "Subtotal", _cartProvider.getSubtotal(), false),
         SizedBox(height: 8),
-        _feeRow(context, "Delivery Fee", deliveryFee, false),
+        _feeRow(context, "Delivery Fee", _deliveryFee, false),
         SizedBox(height: 8),
-        _feeRow(context, "Total", total, true),
+        _feeRow(context, "Total", _total, true),
         Divider(
           color: Colors.grey,
           thickness: 1,
@@ -142,7 +142,7 @@ class CartPage extends StatelessWidget {
   }
 
   Widget _paymentExpansionSection(BuildContext context) {
-    var cartProvider = Provider.of<CartProvider>(context);
+    var _cartProvider = Provider.of<CartProvider>(context);
     return ExpansionTile(
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +158,7 @@ class CartPage extends StatelessWidget {
       ),
       title: Center(
           child: Text(
-        cartProvider.selectedPaymentMethod,
+        _cartProvider.selectedPaymentMethod,
         style: TextStyle(fontSize: 16),
       )),
       children: <Widget>[
@@ -177,10 +177,10 @@ class CartPage extends StatelessWidget {
                       color: Colors.black),
                 ),
                 trailing: Icon(Icons.attach_money),
-                selected: !cartProvider.walletSelected,
+                selected: !_cartProvider.walletSelected,
                 //if wallet is not selected then cash is selected
                 onTap: () {
-                  cartProvider.setPaymentMethod("Cash", false);
+                  _cartProvider.setPaymentMethod("Cash", false);
                 },
                 dense: true,
               ),
@@ -195,10 +195,10 @@ class CartPage extends StatelessWidget {
                       color: Colors.black),
                 ),
                 trailing: Icon(Icons.account_balance_wallet),
-                selected: cartProvider.walletSelected,
+                selected: _cartProvider.walletSelected,
                 subtitle: Text("\$26.00"),
                 onTap: () {
-                  cartProvider.setPaymentMethod("Wallet", true);
+                  _cartProvider.setPaymentMethod("Wallet", true);
                 },
                 dense: true,
               ),
@@ -210,7 +210,7 @@ class CartPage extends StatelessWidget {
   }
 
   Widget _deliveryExpansionSection(BuildContext context) {
-    var cartProvider = Provider.of<CartProvider>(context);
+    var _cartProvider = Provider.of<CartProvider>(context);
 
     return ExpansionTile(
       leading: Column(
@@ -227,7 +227,7 @@ class CartPage extends StatelessWidget {
       ),
       title: Center(
           child: Text(
-        "${cartProvider.roomNumber} ${cartProvider.hostelName}",
+        "${_cartProvider.roomNumber} ${_cartProvider.hostelName}",
         style: TextStyle(fontSize: 16),
       )),
       children: <Widget>[
@@ -249,11 +249,11 @@ class CartPage extends StatelessWidget {
                       ),
                       SizedBox(width: 32),
                       DropdownButton<String>(
-                        value: cartProvider.hostelName,
+                        value: _cartProvider.hostelName,
                         onChanged: (String value) {
-                          cartProvider.setHostelName(value);
+                          _cartProvider.setHostelName(value);
                         },
-                        items: cartProvider.hostels.map<DropdownMenuItem<String>>((String value) {
+                        items: _cartProvider.hostels.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -286,11 +286,11 @@ class CartPage extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                         onSubmitted: (String roomNumber) {
-                          cartProvider.setRoomNumber(roomNumber);
+                          _cartProvider.setRoomNumber(roomNumber);
                         },
                         decoration: InputDecoration(
                             isDense: true,
-                            hintText: cartProvider.roomNumber,
+                            hintText: _cartProvider.roomNumber,
                             hintStyle: TextStyle(color: Colors.black)),
                         textCapitalization: TextCapitalization.characters,
                       ),

@@ -1,4 +1,6 @@
+import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:flutter/foundation.dart';
+
 
 final String _mealDescription =
     """Short description, 280 character limit, describing the meal and all the 
@@ -14,7 +16,24 @@ MealItemList mealItemList = MealItemList(mealItems: [
       mealImage: 'images/Burger.jpg',
       mealDescription: _mealDescription,
       estimatedDeliveryTime: 35,
-      deliveryFee: 1),
+      deliveryFee: 1,
+      extrasList: <ExtrasItem>[
+        ExtrasItem(
+          id: 1,
+          extrasName: "Sweet Potato Chips",
+          extrasPrice: 5,
+        ),
+        ExtrasItem(
+          id: 2,
+          extrasName: "Normal Potato Chips",
+          extrasPrice: 5,
+        ),
+        ExtrasItem(
+          id: 3,
+          extrasName: "Water",
+          extrasPrice: 0,
+        ),
+      ]),
   MealItem(
       id: 2,
       mealName: "Gretaben",
@@ -23,7 +42,24 @@ MealItemList mealItemList = MealItemList(mealItems: [
       mealImage: 'images/Noodles.jpg',
       mealDescription: _mealDescription,
       estimatedDeliveryTime: 30,
-      deliveryFee: 2),
+      deliveryFee: 2,
+      extrasList: <ExtrasItem>[
+        ExtrasItem(
+          id: 1,
+          extrasName: "Sweet Potato Chips",
+          extrasPrice: 5,
+        ),
+        ExtrasItem(
+          id: 2,
+          extrasName: "Normal Potato Chips",
+          extrasPrice: 5,
+        ),
+        ExtrasItem(
+          id: 3,
+          extrasName: "Kelewele",
+          extrasPrice: 3,
+        ),
+      ]),
   MealItem(
       id: 3,
       mealName: "Pork Fried Rice",
@@ -85,8 +121,7 @@ MealItemList mealItemList = MealItemList(mealItems: [
 class MealItemList {
   List<MealItem> mealItems; // A list of meal item from the class above
 
-  MealItemList(
-      {@required this.mealItems}); //requires the mealItems list line above
+  MealItemList({@required this.mealItems});
 }
 
 class MealItem {
@@ -98,6 +133,7 @@ class MealItem {
   final String restaurantName;
   final int estimatedDeliveryTime;
   final int deliveryFee;
+  final List<ExtrasItem> extrasList;
 
   MealItem({
     @required this.id,
@@ -108,5 +144,17 @@ class MealItem {
     this.restaurantName,
     this.estimatedDeliveryTime,
     this.deliveryFee,
+    this.extrasList,
   });
+
+
+  List<String> listExtrasNames() {
+    List<String> extrasNames = [];
+    if(extrasList == null) return extrasNames;
+    for (ExtrasItem extrasItem in extrasList){
+      extrasNames.add(extrasItem.extrasName);
+    }
+    return extrasNames;
+  }
+
 }
