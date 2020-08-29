@@ -4,10 +4,12 @@ import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
-import 'package:chop_chop_flutter/screen_elements/CheckboxExtrasTile.dart';
+import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
+import 'package:chop_chop_flutter/screen_elements/checkbox_extras_tile.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
 import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
+import 'package:chop_chop_flutter/temp_data/temp_more_choices_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -25,10 +27,10 @@ class MealProfilePage extends StatefulWidget {
 }
 
 class _MealProfilePageState extends State<MealProfilePage> {
-  MealItem _mealItem = mealItemList.mealItems[1];
+  MealItem _mealItem = tempMoreChoicesList.mealItems[1];
   List<ExtrasItem> _selectedExtras = [];
   MealHelper mealHelper =
-      MealHelper(mealBasePrice: mealItemList.mealItems[1].mealBasePrice);
+      MealHelper(mealBasePrice: tempMoreChoicesList.mealItems[1].mealBasePrice);
 
   @override
   Widget build(BuildContext context) {
@@ -99,13 +101,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
             ]),
           ]),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (() {
-            Navigator.of(context).pushNamed('/CartPage');
-          }),
-          child: Icon(Icons.shopping_cart),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
+        floatingActionButton: CartFAB(),
         bottomNavigationBar: bottomButtons(context));
   }
 
@@ -175,8 +171,6 @@ class _MealProfilePageState extends State<MealProfilePage> {
           totalMealPrice: mealHelper.totalMealPrice,
         );
         _cartProvider.addToCartList(cartItem);
-        Scaffold.of(context).showSnackBar(
-            new SnackBar(content: Text("Your Order Has Been Placed!")));
       },
       child: Text(
         "Add  \$${mealHelper.totalMealPrice.toStringAsFixed(2)}",

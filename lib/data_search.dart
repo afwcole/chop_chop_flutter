@@ -1,3 +1,4 @@
+import 'package:chop_chop_flutter/temp_data/temp_more_choices_lists.dart';
 import 'package:flutter/material.dart';
 
 import 'data_model/meal_item.dart';
@@ -5,9 +6,9 @@ import 'data_model/meal_item.dart';
 class DataSearch extends SearchDelegate<String> {
 
   List<MealItem> _recentSearches = [
-    mealItemList.mealItems[1],
-    mealItemList.mealItems[6],
-    mealItemList.mealItems[3],
+    tempMoreChoicesList.mealItems[1],
+    tempMoreChoicesList.mealItems[6],
+    tempMoreChoicesList.mealItems[3],
   ];
 
   @override
@@ -46,7 +47,7 @@ class DataSearch extends SearchDelegate<String> {
     //show when user searches for something
     final suggestionList = query.isEmpty
         ? _recentSearches
-        : mealItemList.mealItems;
+        : tempMoreChoicesList.mealItems;
 
     return ListView.builder(
       itemBuilder: (context, index) {

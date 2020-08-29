@@ -1,12 +1,13 @@
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
 import 'package:chop_chop_flutter/screen_elements/cards/restuarant_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantCardDeck extends StatelessWidget {
   final String deckTitle;
+  final RestaurantItemList restaurantItemList;
 
-  RestaurantCardDeck({@required this.deckTitle});
+  RestaurantCardDeck({@required this.deckTitle, @required this.restaurantItemList});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +15,13 @@ class RestaurantCardDeck extends StatelessWidget {
       children: <Widget>[
         Container(
             alignment: Alignment.centerLeft,
-            margin: EdgeInsets.only(left: 16,),
-            child: Text(deckTitle, style: Theme
-                .of(context)
-                .textTheme
-                .subhead,)
-        ),
+            margin: EdgeInsets.only(
+              left: 16,
+            ),
+            child: Text(
+              deckTitle,
+              style: Theme.of(context).textTheme.subhead,
+            )),
         SizedBox(height: 18),
         Container(
           height: 154.0,
@@ -29,8 +31,7 @@ class RestaurantCardDeck extends StatelessWidget {
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
               return RestaurantCard(
-                  restaurantName: mealItemList.mealItems[index].restaurantName,
-                  imageUrl: mealItemList.mealItems[index].mealImage
+                restaurantItem: restaurantItemList.restaurantItems[index],
               );
             },
           ),

@@ -1,4 +1,5 @@
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/pages/meal_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,8 @@ class MealCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/MealProfilePage');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MealProfilePage()));
       },
       child: Container(
         height: 190,

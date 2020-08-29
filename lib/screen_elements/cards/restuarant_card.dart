@@ -1,16 +1,20 @@
+import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
+import 'package:chop_chop_flutter/pages/restaurant_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantCard extends StatelessWidget {
-  final String restaurantName;
-  final String imageUrl;
-
-  RestaurantCard({@required this.restaurantName, @required this.imageUrl});
+  final RestaurantItem restaurantItem;
+  RestaurantCard({@required this.restaurantItem});
 
   @override
   Widget build(BuildContext context) {
+    String restaurantName = restaurantItem.restaurantName;
+    String imageUrl = restaurantItem.restaurantHeaderImage;
+
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/RestaurantProfilePage');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => RestaurantProfilePage()));
       },
       child: Container(
           height: 144,

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
+import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/screen_elements/cards/meal_card_tile.dart';
 import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
@@ -8,11 +9,13 @@ import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../temp_data/temp_restaurants_lists.dart';
+
 class RestaurantProfilePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
-    RestaurantItem _restaurantItem = restaurantItemList.restaurantItems[0];
+    RestaurantItem _restaurantItem = tempRestaurantList.restaurantItems[0];
 
     return Scaffold(
       body: SafeArea(
@@ -49,7 +52,7 @@ class RestaurantProfilePage extends StatelessWidget{
                         ),
                       ),
                       SizedBox(height: 24),
-                      for(int index = 0; index < 4; index++)
+                      for(int index = 0; index < _restaurantItem.restaurantMenu.length; index++)
                         MealCardTile(mealItem: _restaurantItem.restaurantMenu[index]),
                     ],
                   ),
@@ -59,15 +62,7 @@ class RestaurantProfilePage extends StatelessWidget{
           ]
         )
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/CartPage');
-        },
-        child: Icon(Icons.shopping_cart),
-        backgroundColor: Theme
-            .of(context)
-            .primaryColor,
-      ),
+      floatingActionButton: CartFAB(),
     );
   }
 }

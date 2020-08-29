@@ -1,3 +1,4 @@
+import 'package:chop_chop_flutter/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -10,7 +11,8 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/CartPage');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => CartPage()));
       },
       child: Container(
         height: 96,

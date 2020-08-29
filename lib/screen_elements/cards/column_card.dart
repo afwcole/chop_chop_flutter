@@ -1,4 +1,5 @@
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/pages/meal_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class ColumnCard extends StatelessWidget {
@@ -23,7 +24,8 @@ class ColumnCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/MealProfilePage');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MealProfilePage()));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 14),
