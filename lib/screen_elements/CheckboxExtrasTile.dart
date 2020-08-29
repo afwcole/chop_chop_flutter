@@ -25,7 +25,6 @@ class CheckboxExtrasTile extends StatelessWidget{
       onTap: checkbox.onChanged != null ? () {
         checkbox.onChanged(!checkbox.value);
       } : null,
-      autofocus: true,
     );
   }
 }

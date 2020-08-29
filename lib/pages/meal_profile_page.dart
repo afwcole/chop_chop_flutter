@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:chop_chop_flutter/screen_elements/CheckboxExtrasTile.dart';
-import 'package:chop_chop_flutter/screen_elements/buttons/bottom_buttons.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
 import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
@@ -11,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
+import 'package:provider/provider.dart';
+
+import '../meal_helper.dart';
 
 class MealProfilePage extends StatefulWidget {
   MealProfilePage({Key key, this.title}) : super(key: key);
@@ -23,24 +27,17 @@ class MealProfilePage extends StatefulWidget {
 class _MealProfilePageState extends State<MealProfilePage> {
   MealItem _mealItem = mealItemList.mealItems[1];
   List<ExtrasItem> _selectedExtras = [];
-
-  List<ExtrasItem> getSelectedExtras(List<String> checked){
-    List<ExtrasItem> temp = [];
-    for (var i = 0; i < _mealItem.extrasList.length; i++) {
-      if (checked.contains(_mealItem.extrasList[i].extrasName))
-        temp.add(_mealItem.extrasList[i]);
-    }
-    return temp;
-  }
+  MealHelper mealHelper =
+      MealHelper(mealBasePrice: mealItemList.mealItems[1].mealBasePrice);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
+    mealHelper.setTotalMealPrice();
 
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: <Widget>[
+        body: SafeArea(
+          child: Stack(children: <Widget>[
             CustomScrollView(slivers: <Widget>[
               SliverAppBar(
                 backgroundColor: Colors.transparent,
@@ -49,10 +46,10 @@ class _MealProfilePageState extends State<MealProfilePage> {
                 expandedHeight: 200,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                    background:
-                    HeaderAndLogo(
-                      headerImageUrl: _mealItem.mealImage,
-                      showLogo: false,)),
+                    background: HeaderAndLogo(
+                  headerImageUrl: _mealItem.mealImage,
+                  showLogo: false,
+                )),
               ),
               SliverList(
                 delegate: SliverChildListDelegate([
@@ -65,19 +62,34 @@ class _MealProfilePageState extends State<MealProfilePage> {
                       SizedBox(height: 32),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                            "Extras", style: themeStyle.textTheme.subhead
-                            .copyWith(decoration: TextDecoration.underline)),
+                        child: Text("Extras",
+                            style: themeStyle.textTheme.subhead.copyWith(
+                                decoration: TextDecoration.underline)),
                       ),
                       CheckboxGroup(
                         activeColor: Theme.of(context).primaryColor,
-                        onChange: ((bool isChecked, String label, int index) {}),
+                        onChange: ((bool isChecked, String label, int index) {
+                          if (isChecked) {
+                            setState(() {
+                              mealHelper.addExtrasPrice(
+                                  _mealItem.extrasList[index].extrasPrice);
+                            });
+                          } else {
+                            setState(() {
+                              mealHelper.subExtrasPrice(
+                                  _mealItem.extrasList[index].extrasPrice);
+                            });
+                          }
+                        }),
                         onSelected: ((List<String> checked) {
-                          _selectedExtras = getSelectedExtras(checked);
+                          _selectedExtras = _getSelectedExtras(checked);
                         }),
                         labels: _mealItem.listExtrasNames(),
-                        itemBuilder: (Checkbox cb, Text  text, int index){
-                          return CheckboxExtrasTile(checkbox: cb, text: text, price: _mealItem.extrasList[index].extrasPrice);
+                        itemBuilder: (Checkbox cb, Text text, int index) {
+                          return CheckboxExtrasTile(
+                              checkbox: cb,
+                              text: text,
+                              price: _mealItem.extrasList[index].extrasPrice);
                         },
                       ),
                     ]),
@@ -85,17 +97,101 @@ class _MealProfilePageState extends State<MealProfilePage> {
                 ]),
               ),
             ]),
-          ]
+          ]),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (() {
+            Navigator.of(context).pushNamed('/CartPage');
+          }),
+          child: Icon(Icons.shopping_cart),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        bottomNavigationBar: bottomButtons(context));
+  }
+
+  Widget bottomButtons(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: <Widget>[
+          SizedBox(width: 8),
+          twoWayButton(context),
+          SizedBox(width: 4),
+          Expanded(child: addButton(context)),
+          SizedBox(width: 8),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: ((){
-          Navigator.of(context).pushNamed('/CartPage');
-        }),
-        child: Icon(Icons.shopping_cart),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      bottomNavigationBar: BottomButtons(price: _mealItem.mealBasePrice)
     );
+  }
+
+  Widget twoWayButton(BuildContext context) {
+    return Container(
+      width: 114,
+      padding: EdgeInsets.symmetric(vertical: 2),
+      decoration: BoxDecoration(
+          color: Color(0xFFCCCCCC), borderRadius: BorderRadius.circular(30)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          IconButton(
+              icon: Icon(Icons.remove, color: Colors.black, size: 16),
+              onPressed: () {
+                setState(() {
+                  mealHelper.decrementQuantity();
+                });
+              }),
+          Text(
+            "${mealHelper.quantity}",
+            style: Theme.of(context)
+                .textTheme
+                .button
+                .copyWith(color: Colors.black),
+          ),
+          IconButton(
+              icon: Icon(Icons.add, color: Colors.black, size: 16),
+              onPressed: () {
+                setState(() {
+                  mealHelper.incrementQuantity();
+                });
+              }),
+        ],
+      ),
+    );
+  }
+
+  Widget addButton(BuildContext context) {
+    var _cartProvider = Provider.of<CartProvider>(context);
+    return RaisedButton(
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+      color: Theme.of(context).primaryColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      onPressed: () {
+        CartItem cartItem = CartItem(
+          mealItem: _mealItem,
+          selectedExtras: _selectedExtras,
+          quantity: mealHelper.quantity,
+          totalMealPrice: mealHelper.totalMealPrice,
+        );
+        _cartProvider.addToCartList(cartItem);
+        Scaffold.of(context).showSnackBar(
+            new SnackBar(content: Text("Your Order Has Been Placed!")));
+      },
+      child: Text(
+        "Add  \$${mealHelper.totalMealPrice.toStringAsFixed(2)}",
+        style: Theme.of(context).textTheme.button,
+      ),
+    );
+  }
+
+  List<ExtrasItem> _getSelectedExtras(List<String> checked) {
+    List<ExtrasItem> temp = [];
+    for (var i = 0; i < _mealItem.extrasList.length; i++) {
+      if (checked.contains(_mealItem.extrasList[i].extrasName)) {
+        temp.add(_mealItem.extrasList[i]);
+      }
+    }
+    return temp;
   }
 }

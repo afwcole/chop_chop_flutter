@@ -1,8 +1,11 @@
-import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'dart:developer';
+
+import 'package:chop_chop_flutter/data_model/cart_item.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
-  List<MealItem> _cartList;
+  List<CartItem> _cartList;
   String _selectedPaymentMethod;
   bool _walletSelected;
   String _hostelName;
@@ -14,11 +17,9 @@ class CartProvider with ChangeNotifier {
     _walletSelected = false;
     _hostelName = "Hall 7";
     _roomNumber = "25B";
-    _cartList = [
-      mealItemList.mealItems[1],
-      mealItemList.mealItems[2],
-      mealItemList.mealItems[3],
-    ];
+
+    _cartList = [];
+
     _hostels = [
       "Brunei (Old)",
       "Brunei (New)",
@@ -36,7 +37,7 @@ class CartProvider with ChangeNotifier {
   bool get walletSelected => _walletSelected;
   String get hostelName => _hostelName;
   String get roomNumber => _roomNumber;
-  List<MealItem> get cartList => _cartList;
+  List<CartItem> get cartList => _cartList;
   List<String> get hostels => _hostels;
 
   //Setters
@@ -56,23 +57,42 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addToCartList(MealItem mealItem){
-    if(_cartList.contains(mealItem) == false){
-      _cartList.add(mealItem);
+  void addToCartList(CartItem cartItem){
+    log("${safeToAdd(cartItem)}");
+    if(safeToAdd(cartItem)){
+      _cartList.add(cartItem);
       notifyListeners();
     }
   }
 
-  void removeFromCartList(MealItem mealItem) {
-    if (_cartList.contains(mealItem) == true) {
-      _cartList.remove(mealItem);
+  void removeFromCartList(CartItem cartItem) {
+    if (_cartList.contains(cartItem) == true) {
+      _cartList.remove(cartItem);
       notifyListeners();
     }
+  }
+
+  bool safeToAdd(CartItem newCartItem) {
+    for (CartItem cartItem in _cartList) {
+      if (_sameCartItem(cartItem, newCartItem)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool _sameCartItem(CartItem cartItem, CartItem newCartItem){
+    if(cartItem.mealItem.mealName == newCartItem.mealItem.mealName)
+      if (cartItem.quantity == newCartItem.quantity)
+        if (cartItem.totalMealPrice == newCartItem.totalMealPrice)
+          if (listEquals(cartItem.selectedExtras, newCartItem.selectedExtras))
+            return true;
+    return false;
   }
 
   double getSubtotal(){
     double subtotal = 0;
-    for (var item in _cartList) subtotal += item.mealBasePrice;
+    for (var item in _cartList) subtotal += item.totalMealPrice;
     return subtotal;
   }
 }

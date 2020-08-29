@@ -53,7 +53,7 @@ class CartPage extends StatelessWidget {
           physics: ClampingScrollPhysics(),
           itemCount: _cartProvider.cartList.length,
           itemBuilder: (context, index) {
-            return CartMealTile(mealItem: _cartProvider.cartList[index]);
+            return CartMealTile(cartItem: _cartProvider.cartList[index]);
           },
           separatorBuilder: (BuildContext context, int index) {
             return Divider(

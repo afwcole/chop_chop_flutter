@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +6,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 class CartMealTile extends StatelessWidget {
-  final MealItem mealItem;
+  final CartItem cartItem;
 
   CartMealTile({
-    @required this.mealItem,
+    @required this.cartItem,
   });
 
   @override
@@ -21,10 +21,9 @@ class CartMealTile extends StatelessWidget {
         .width * 0.35;
 
     var cartProvider = Provider.of<CartProvider>(context);
-    String mealName = mealItem.mealName;
-    String restaurantName = mealItem.restaurantName;
-    double price = mealItem.mealBasePrice;
-    int qty = 3;
+    String mealName = cartItem.mealItem.mealName;
+    String restaurantName = cartItem.mealItem.restaurantName;
+    double price = cartItem.totalMealPrice;
 
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -59,13 +58,13 @@ class CartMealTile extends StatelessWidget {
                 RawMaterialButton(
                   onPressed: () {
                     Slidable.of(context).close();
-                    cartProvider.removeFromCartList(mealItem);
+                    cartProvider.removeFromCartList(cartItem);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text("Delete"),
                         duration: Duration(seconds: 1),
                         action: SnackBarAction(label: "Undo", onPressed: () {
-                          return cartProvider.addToCartList(mealItem);
+                          return cartProvider.addToCartList(cartItem);
                         },)));
                   },
                   elevation: 1.0,
@@ -102,7 +101,7 @@ class CartMealTile extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      "$qty",
+                      "${cartItem.quantity}",
                       style: Theme
                           .of(context)
                           .textTheme

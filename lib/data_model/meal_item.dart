@@ -3,9 +3,7 @@ import 'package:flutter/foundation.dart';
 
 
 final String _mealDescription =
-    """Short description, 280 character limit, describing the meal and all the 
-    ingredients involved. Opportunity to convey a message to customers 
-    and sell the product""";
+    "Short description, 280 character limit, describing the meal and all the ingredients involved. Opportunity to convey a message to customers and sell the product";
 
 MealItemList mealItemList = MealItemList(mealItems: [
   MealItem(
