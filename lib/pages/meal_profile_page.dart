@@ -3,23 +3,23 @@ import 'dart:ui';
 import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/meal_helper.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
 import 'package:chop_chop_flutter/screen_elements/checkbox_extras_tile.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
 import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
-import 'package:chop_chop_flutter/temp_data/temp_more_choices_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:provider/provider.dart';
 
-import '../meal_helper.dart';
 
 class MealProfilePage extends StatefulWidget {
-  MealProfilePage({Key key, this.title}) : super(key: key);
+  final MealItem mealItem;
+  MealProfilePage({Key key, this.title, @required this.mealItem}) : super(key: key);
   final String title;
 
   @override
@@ -27,15 +27,22 @@ class MealProfilePage extends StatefulWidget {
 }
 
 class _MealProfilePageState extends State<MealProfilePage> {
-  MealItem _mealItem = tempMoreChoicesList.mealItems[1];
-  List<ExtrasItem> _selectedExtras = [];
-  MealHelper mealHelper =
-      MealHelper(mealBasePrice: tempMoreChoicesList.mealItems[1].mealBasePrice);
+  MealItem _mealItem;
+  List<ExtrasItem> _selectedExtras;
+  MealHelper _mealHelper;
+
+  @override
+  void initState(){
+    _mealItem = widget.mealItem;
+    _mealHelper = MealHelper(mealBasePrice: _mealItem.mealBasePrice);
+    _selectedExtras = [];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
-    mealHelper.setTotalMealPrice();
+    _mealHelper.setTotalMealPrice();
 
     return Scaffold(
         body: SafeArea(
@@ -73,12 +80,12 @@ class _MealProfilePageState extends State<MealProfilePage> {
                         onChange: ((bool isChecked, String label, int index) {
                           if (isChecked) {
                             setState(() {
-                              mealHelper.addExtrasPrice(
+                              _mealHelper.addExtrasPrice(
                                   _mealItem.extrasList[index].extrasPrice);
                             });
                           } else {
                             setState(() {
-                              mealHelper.subExtrasPrice(
+                              _mealHelper.subExtrasPrice(
                                   _mealItem.extrasList[index].extrasPrice);
                             });
                           }
@@ -133,11 +140,11 @@ class _MealProfilePageState extends State<MealProfilePage> {
               icon: Icon(Icons.remove, color: Colors.black, size: 16),
               onPressed: () {
                 setState(() {
-                  mealHelper.decrementQuantity();
+                  _mealHelper.decrementQuantity();
                 });
               }),
           Text(
-            "${mealHelper.quantity}",
+            "${_mealHelper.quantity}",
             style: Theme.of(context)
                 .textTheme
                 .button
@@ -147,7 +154,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
               icon: Icon(Icons.add, color: Colors.black, size: 16),
               onPressed: () {
                 setState(() {
-                  mealHelper.incrementQuantity();
+                  _mealHelper.incrementQuantity();
                 });
               }),
         ],
@@ -167,13 +174,13 @@ class _MealProfilePageState extends State<MealProfilePage> {
         CartItem cartItem = CartItem(
           mealItem: _mealItem,
           selectedExtras: _selectedExtras,
-          quantity: mealHelper.quantity,
-          totalMealPrice: mealHelper.totalMealPrice,
+          quantity: _mealHelper.quantity,
+          totalMealPrice: _mealHelper.totalMealPrice,
         );
         _cartProvider.addToCartList(cartItem);
       },
       child: Text(
-        "Add  \$${mealHelper.totalMealPrice.toStringAsFixed(2)}",
+        "Add  \$${_mealHelper.totalMealPrice.toStringAsFixed(2)}",
         style: Theme.of(context).textTheme.button,
       ),
     );

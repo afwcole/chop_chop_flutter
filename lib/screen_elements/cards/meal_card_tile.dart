@@ -21,7 +21,7 @@ class MealCardTile extends StatelessWidget{
     return GestureDetector(
       onTap: (){
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MealProfilePage()));},
+            context, MaterialPageRoute(builder: (context) => MealProfilePage(mealItem: mealItem,)));},
       child: Container(
         height: 80,
         width: 312,

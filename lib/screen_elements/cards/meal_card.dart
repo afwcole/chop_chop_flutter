@@ -20,7 +20,7 @@ class MealCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MealProfilePage()));
+            context, MaterialPageRoute(builder: (context) => MealProfilePage(mealItem: mealItem,)));
       },
       child: Container(
         height: 190,

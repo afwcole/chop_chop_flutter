@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class RestaurantCard extends StatelessWidget {
   final RestaurantItem restaurantItem;
+
   RestaurantCard({@required this.restaurantItem});
 
   @override
@@ -14,7 +15,13 @@ class RestaurantCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => RestaurantProfilePage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => RestaurantProfilePage(
+                      restaurantItem: restaurantItem,
+                    )
+            ),
+        );
       },
       child: Container(
           height: 144,
@@ -25,47 +32,40 @@ class RestaurantCard extends StatelessWidget {
             //padding around each card left & right
             semanticContainer: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: Stack(
+            child: Stack(alignment: Alignment.bottomLeft, children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Container(
+                // provides gradient on top of image for text legibility
+                height: 144,
+                width: 312,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment(0, .30),
+                    colors: <Color>[Color(0xC0000000), Color(0x00000000)],
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 16, bottom: 16),
+                //text-padding in card
                 alignment: Alignment.bottomLeft,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(imageUrl),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container( // provides gradient on top of image for text legibility
-                    height: 144,
-                    width: 312,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment(0, .30),
-                        colors: <Color>[Color(0xC0000000), Color(0x00000000)],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, bottom: 16),
-                    //text-padding in card
-                    alignment: Alignment.bottomLeft,
-                    child: Text(restaurantName,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .title
-                          .copyWith(
+                child: Text(
+                  restaurantName,
+                  style: Theme.of(context).textTheme.title.copyWith(
                         color: Colors.white,
                       ),
-                    ),
-                  ),
-                ]
-            ),
-          )
-      ),
+                ),
+              ),
+            ]),
+          )),
     );
   }
-
 }

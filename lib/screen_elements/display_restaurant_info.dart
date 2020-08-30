@@ -41,9 +41,9 @@ class DisplayRestaurantInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              //Big title
+              width: MediaQuery.of(context).size.width * 0.65,
               alignment: Alignment.centerLeft,
-              child: Text(bigTitleName, style: themeStyle.textTheme.headline,),
+              child: Text(bigTitleName, style: themeStyle.textTheme.headline, overflow: TextOverflow.fade,),
             ),
             Visibility(
               visible: basePrice != null,
@@ -60,7 +60,7 @@ class DisplayRestaurantInfo extends StatelessWidget {
         ),
         SizedBox(height: 8),
         Container(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.topCenter,
           child: Text(description, style: themeStyle.textTheme.body1,),
         ),
         SizedBox(height: 12),
