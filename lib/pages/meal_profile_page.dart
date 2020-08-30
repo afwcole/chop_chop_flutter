@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
-import 'package:chop_chop_flutter/meal_helper.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
 import 'package:chop_chop_flutter/screen_elements/checkbox_extras_tile.dart';
@@ -19,7 +18,8 @@ import 'package:provider/provider.dart';
 
 class MealProfilePage extends StatefulWidget {
   final MealItem mealItem;
-  MealProfilePage({Key key, this.title, @required this.mealItem}) : super(key: key);
+  final CartItem cartItem;
+  MealProfilePage({Key key, this.title, this.mealItem, this.cartItem}) : super(key: key);
   final String title;
 
   @override
@@ -29,20 +29,34 @@ class MealProfilePage extends StatefulWidget {
 class _MealProfilePageState extends State<MealProfilePage> {
   MealItem _mealItem;
   List<ExtrasItem> _selectedExtras;
-  MealHelper _mealHelper;
+  double _totalMealPrice;
+  int _quantity;
+  double _mealBasePrice;
+  double _totalExtrasPrice;
 
   @override
   void initState(){
-    _mealItem = widget.mealItem;
-    _mealHelper = MealHelper(mealBasePrice: _mealItem.mealBasePrice);
-    _selectedExtras = [];
+    if (widget.mealItem != null){
+      _mealItem = widget.mealItem;
+      _selectedExtras = [];
+      _quantity = 1;
+      _totalExtrasPrice = 0;
+      _mealBasePrice = _mealItem.mealBasePrice;
+    }
+    else {
+      _mealItem = widget.cartItem.mealItem;
+      _selectedExtras = widget.cartItem.selectedExtras;
+      _quantity = widget.cartItem.quantity;
+      _totalExtrasPrice = widget.cartItem.getTotalExtrasPrice();
+      _mealBasePrice = widget.cartItem.mealItem.mealBasePrice;
+    }
+    _totalMealPrice = (_mealBasePrice + _totalExtrasPrice) * _quantity;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
-    _mealHelper.setTotalMealPrice();
 
     return Scaffold(
         body: SafeArea(
@@ -76,19 +90,22 @@ class _MealProfilePageState extends State<MealProfilePage> {
                                 decoration: TextDecoration.underline)),
                       ),
                       CheckboxGroup(
+                        checked: getExtrasNameList(_selectedExtras),
                         activeColor: Theme.of(context).primaryColor,
                         onChange: ((bool isChecked, String label, int index) {
-                          if (isChecked) {
-                            setState(() {
-                              _mealHelper.addExtrasPrice(
-                                  _mealItem.extrasList[index].extrasPrice);
-                            });
-                          } else {
-                            setState(() {
-                              _mealHelper.subExtrasPrice(
-                                  _mealItem.extrasList[index].extrasPrice);
-                            });
-                          }
+                          setState((){
+                            if (isChecked) {
+                              _totalExtrasPrice +=
+                                  _mealItem.extrasList[index].extrasPrice;
+                            } else {
+                              _totalExtrasPrice -=
+                                  _mealItem.extrasList[index].extrasPrice;
+                            }
+
+                            _totalMealPrice =
+                                (_mealBasePrice + _totalExtrasPrice) *
+                                    _quantity;
+                          });
                         }),
                         onSelected: ((List<String> checked) {
                           _selectedExtras = _getSelectedExtras(checked);
@@ -110,6 +127,14 @@ class _MealProfilePageState extends State<MealProfilePage> {
         ),
         floatingActionButton: CartFAB(),
         bottomNavigationBar: bottomButtons(context));
+  }
+
+  List<String> getExtrasNameList(List<ExtrasItem> selectedExtras) {
+    List<String> nameList = [];
+    for (ExtrasItem extraItem in selectedExtras) {
+      nameList.add(extraItem.extrasName);
+    }
+    return nameList;
   }
 
   Widget bottomButtons(BuildContext context) {
@@ -140,11 +165,15 @@ class _MealProfilePageState extends State<MealProfilePage> {
               icon: Icon(Icons.remove, color: Colors.black, size: 16),
               onPressed: () {
                 setState(() {
-                  _mealHelper.decrementQuantity();
+                  if (_quantity != 0) {
+                    _quantity--;
+                    _totalMealPrice =
+                        (_mealBasePrice + _totalExtrasPrice) * _quantity;
+                  }
                 });
               }),
           Text(
-            "${_mealHelper.quantity}",
+            "$_quantity",
             style: Theme.of(context)
                 .textTheme
                 .button
@@ -154,7 +183,9 @@ class _MealProfilePageState extends State<MealProfilePage> {
               icon: Icon(Icons.add, color: Colors.black, size: 16),
               onPressed: () {
                 setState(() {
-                  _mealHelper.incrementQuantity();
+                  _quantity++;
+                  _totalMealPrice =
+                      (_mealBasePrice + _totalExtrasPrice) * _quantity;
                 });
               }),
         ],
@@ -164,6 +195,10 @@ class _MealProfilePageState extends State<MealProfilePage> {
 
   Widget addButton(BuildContext context) {
     var _cartProvider = Provider.of<CartProvider>(context);
+    bool isEdit = widget.cartItem != null;
+    String buttonText = isEdit ? "Update" : "Add";
+    CartItem finalCartItem;
+
     return RaisedButton(
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
       color: Theme.of(context).primaryColor,
@@ -171,16 +206,20 @@ class _MealProfilePageState extends State<MealProfilePage> {
         borderRadius: BorderRadius.circular(30.0),
       ),
       onPressed: () {
-        CartItem cartItem = CartItem(
+        finalCartItem = CartItem(
           mealItem: _mealItem,
           selectedExtras: _selectedExtras,
-          quantity: _mealHelper.quantity,
-          totalMealPrice: _mealHelper.totalMealPrice,
+          quantity: _quantity,
+          totalMealPrice: _totalMealPrice,
         );
-        _cartProvider.addToCartList(cartItem);
+
+        if(isEdit){
+          _cartProvider.removeFromCartList(widget.cartItem);
+        }
+        _cartProvider.addToCartList(finalCartItem);
       },
       child: Text(
-        "Add  \$${_mealHelper.totalMealPrice.toStringAsFixed(2)}",
+        "$buttonText  \$${_totalMealPrice.toStringAsFixed(2)}",
         style: Theme.of(context).textTheme.button,
       ),
     );
