@@ -9,8 +9,8 @@ class RestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String restaurantName = restaurantItem.restaurantName;
-    String imageUrl = restaurantItem.restaurantHeaderImage;
+    String restaurantName = restaurantItem.name;
+    String imageUrl = restaurantItem.headerImage;
 
     return GestureDetector(
       onTap: () {

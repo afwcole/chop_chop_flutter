@@ -29,11 +29,7 @@ class RestaurantProfilePage extends StatelessWidget {
           pinned: true,
           elevation: 0,
           flexibleSpace: FlexibleSpaceBar(
-            background: HeaderAndLogo(
-              headerImageUrl: restaurantItem.restaurantHeaderImage,
-              logoImageUrl: restaurantItem.restaurantLogo,
-              showLogo: true,
-            ),
+            background: HeaderAndLogo(restaurantItem: restaurantItem,),
           ),
         ),
         SliverList(

@@ -9,23 +9,25 @@ class MealItemList {
 
 class MealItem {
   final int id;
-  final String mealImage;
-  final String mealName;
-  final double mealBasePrice;
-  final String mealDescription;
+  final String image;
+  final String name;
+  final double basePrice;
+  final String description;
   final String restaurantName;
-  final int estimatedDeliveryTime;
+  final List<String> sizes;
+  final int estDeliveryTime;
   final int deliveryFee;
   final List<ExtrasItem> extrasList;
 
   MealItem({
     @required this.id,
-    @required this.mealImage,
-    @required this.mealName,
-    @required this.mealBasePrice,
-    @required this.mealDescription,
+    @required this.image,
+    @required this.name,
+    @required this.basePrice,
+    @required this.description,
     this.restaurantName,
-    this.estimatedDeliveryTime,
+    this.sizes,
+    this.estDeliveryTime,
     this.deliveryFee,
     this.extrasList,
   });
@@ -33,11 +35,40 @@ class MealItem {
 
   List<String> listExtrasNames() {
     List<String> extrasNames = [];
-    if(extrasList == null) return extrasNames;
-    for (ExtrasItem extrasItem in extrasList){
-      extrasNames.add(extrasItem.extrasName);
+    if (extrasList == null) return extrasNames;
+    for (ExtrasItem extrasItem in extrasList) {
+      extrasNames.add(extrasItem.name);
     }
     return extrasNames;
   }
 
+  //FOR SERIALISATION and DE-SERIALISATION
+  factory MealItem.fromJson(Map<String, dynamic> jsonData) {
+    return MealItem(
+      id: jsonData['id'],
+      image: jsonData['image'],
+      name: jsonData['name'],
+      basePrice: jsonData['basePrice'],
+      description: jsonData['description'],
+      restaurantName: jsonData['restaurantName'],
+      sizes: jsonData['sizes'],
+      estDeliveryTime: jsonData['estDeliveryTime'],
+      deliveryFee: jsonData['deliveryFee'],
+      extrasList: ExtrasItem.decodeExtrasList(jsonData['extrasList']),
+    );
+  }
+
+  static Map<String, dynamic> toMap(MealItem mealItem) =>
+      {
+        'id': mealItem.id,
+        'image': mealItem.image,
+        'name': mealItem.name,
+        'basePrice': mealItem.basePrice,
+        'description': mealItem.description,
+        'restaurantName': mealItem.restaurantName,
+        'sizes': mealItem.sizes,
+        'estDeliveryTime': mealItem.estDeliveryTime,
+        'deliveryFee': mealItem.deliveryFee,
+        'extrasList': ExtrasItem.encodeExtrasList(mealItem.extrasList),
+      };
 }

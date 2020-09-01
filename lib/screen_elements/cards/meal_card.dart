@@ -12,10 +12,10 @@ class MealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _mealName = mealItem.mealName;
+    String _mealName = mealItem.name;
     String _restaurantName = mealItem.restaurantName;
-    double _mealPrice = mealItem.mealBasePrice;
-    String _mealImage = mealItem.mealImage;
+    double _mealPrice = mealItem.basePrice;
+    String _mealImage = mealItem.image;
 
     return GestureDetector(
       onTap: () {
@@ -36,9 +36,10 @@ class MealCard extends StatelessWidget {
               Stack(
                   alignment: Alignment.bottomLeft,
                   children: <Widget>[
-                    // stacks text on top of gradient and image
                     Image.asset(
-                        _mealImage, height: 137, width: 312, fit: BoxFit.cover),
+                      _mealImage, height: 137,
+                      width: 312,
+                      fit: BoxFit.cover),
                     Container( // provides gradient on top of image for text legibility
                       height: 137,
                       width: 312,

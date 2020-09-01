@@ -1,20 +1,26 @@
 import 'dart:ui';
 
+import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
 import 'package:flutter/material.dart';
 
 class HeaderAndLogo extends StatelessWidget {
-  final String headerImageUrl;
-  final bool showLogo;
-  final String logoImageUrl;
+  final MealItem mealItem;
+  final RestaurantItem restaurantItem;
 
   HeaderAndLogo({
-    @required this.headerImageUrl,
-    this.logoImageUrl,
-    @required this.showLogo,
+    this.mealItem,
+    this.restaurantItem,
   });
 
   @override
   Widget build(BuildContext context) {
+    String _headerImageUrl = mealItem != null
+        ? mealItem.image
+        : restaurantItem.headerImage;
+    String _logoImageUrl = mealItem != null
+        ? null
+        : restaurantItem.logoImage;
 
     return Container(
       height: 230,
@@ -22,14 +28,14 @@ class HeaderAndLogo extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 230,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
-            child: Image.asset(headerImageUrl, fit: BoxFit.cover,),
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset(
+              _headerImageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
           Visibility(
-            visible: showLogo,
+            visible: mealItem == null,
             child: Stack(
               children: <Widget>[
                 Container(
@@ -39,7 +45,8 @@ class HeaderAndLogo extends StatelessWidget {
                       sigmaY: 2.0,
                     ),
                     child: Scaffold(
-                      backgroundColor: Colors.black12,),
+                      backgroundColor: Colors.black12,
+                    ),
                   ),
                 ),
                 Center(
@@ -59,14 +66,16 @@ class HeaderAndLogo extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: new DecorationImage(
-                           image: AssetImage(logoImageUrl == null ? " " : logoImageUrl),
-                           fit: BoxFit.fill),
+                              image: AssetImage(
+                                  _logoImageUrl == null ? " " : _logoImageUrl),
+                              fit: BoxFit.fill),
                         ),
                       ),
                     ],
                   ),
                 )
-              ],),
+              ],
+            ),
           ),
         ],
       ),

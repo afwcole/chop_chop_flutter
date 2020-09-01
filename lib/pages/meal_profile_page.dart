@@ -38,17 +38,17 @@ class _MealProfilePageState extends State<MealProfilePage> {
   void initState(){
     if (widget.mealItem != null){
       _mealItem = widget.mealItem;
-      _selectedExtras = [];
+      _selectedExtras = <ExtrasItem>[];
       _quantity = 1;
       _totalExtrasPrice = 0;
-      _mealBasePrice = _mealItem.mealBasePrice;
+      _mealBasePrice = _mealItem.basePrice;
     }
     else {
       _mealItem = widget.cartItem.mealItem;
       _selectedExtras = widget.cartItem.selectedExtras;
       _quantity = widget.cartItem.quantity;
       _totalExtrasPrice = widget.cartItem.getTotalExtrasPrice();
-      _mealBasePrice = widget.cartItem.mealItem.mealBasePrice;
+      _mealBasePrice = widget.cartItem.mealItem.basePrice;
     }
     _totalMealPrice = (_mealBasePrice + _totalExtrasPrice) * _quantity;
     super.initState();
@@ -69,10 +69,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                 expandedHeight: 200,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                    background: HeaderAndLogo(
-                  headerImageUrl: _mealItem.mealImage,
-                  showLogo: false,
-                )),
+                    background: HeaderAndLogo(mealItem: _mealItem,),),
               ),
               SliverList(
                 delegate: SliverChildListDelegate([
@@ -96,10 +93,10 @@ class _MealProfilePageState extends State<MealProfilePage> {
                           setState((){
                             if (isChecked) {
                               _totalExtrasPrice +=
-                                  _mealItem.extrasList[index].extrasPrice;
+                                  _mealItem.extrasList[index].price;
                             } else {
                               _totalExtrasPrice -=
-                                  _mealItem.extrasList[index].extrasPrice;
+                                  _mealItem.extrasList[index].price;
                             }
 
                             _totalMealPrice =
@@ -115,7 +112,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                           return CheckboxExtrasTile(
                               checkbox: cb,
                               text: text,
-                              price: _mealItem.extrasList[index].extrasPrice);
+                              price: _mealItem.extrasList[index].price);
                         },
                       ),
                     ]),
@@ -132,7 +129,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
   List<String> getExtrasNameList(List<ExtrasItem> selectedExtras) {
     List<String> nameList = [];
     for (ExtrasItem extraItem in selectedExtras) {
-      nameList.add(extraItem.extrasName);
+      nameList.add(extraItem.name);
     }
     return nameList;
   }
@@ -228,7 +225,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
   List<ExtrasItem> _getSelectedExtras(List<String> checked) {
     List<ExtrasItem> temp = [];
     for (var i = 0; i < _mealItem.extrasList.length; i++) {
-      if (checked.contains(_mealItem.extrasList[i].extrasName)) {
+      if (checked.contains(_mealItem.extrasList[i].name)) {
         temp.add(_mealItem.extrasList[i]);
       }
     }

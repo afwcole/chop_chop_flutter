@@ -13,10 +13,10 @@ class ColumnCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String mealName = mealItem.mealName;
+    String mealName = mealItem.name;
     String restaurantName = mealItem.restaurantName;
-    double price = mealItem.mealBasePrice;
-    String imageUrl = mealItem.mealImage;
+    double price = mealItem.basePrice;
+    String imageUrl = mealItem.image;
     double textWidth = MediaQuery
         .of(context)
         .size

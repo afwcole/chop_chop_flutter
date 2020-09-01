@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider with ChangeNotifier {
   List<CartItem> _cartList;
@@ -17,7 +16,6 @@ class CartProvider with ChangeNotifier {
     _walletSelected = false;
     _hostelName = "Hall 7";
     _roomNumber = "25B";
-
     _cartList = [];
 
     _hostels = [
@@ -30,6 +28,8 @@ class CartProvider with ChangeNotifier {
       "Tek Credits",
       "Anglican Hostel"
     ];
+
+    loadPreferences();
   }
 
   //Getters
@@ -58,10 +58,10 @@ class CartProvider with ChangeNotifier {
   }
 
   void addToCartList(CartItem cartItem){
-    log("${safeToAdd(cartItem)}");
     if(safeToAdd(cartItem)){
       _cartList.add(cartItem);
       notifyListeners();
+      savePreferences();
     }
   }
 
@@ -69,6 +69,7 @@ class CartProvider with ChangeNotifier {
     if (_cartList.contains(cartItem) == true) {
       _cartList.remove(cartItem);
       notifyListeners();
+      savePreferences();
     }
   }
 
@@ -82,7 +83,7 @@ class CartProvider with ChangeNotifier {
   }
 
   bool _sameCartItem(CartItem cartItem, CartItem newCartItem){
-    if(cartItem.mealItem.mealName == newCartItem.mealItem.mealName)
+    if(cartItem.mealItem.name == newCartItem.mealItem.name)
       if (cartItem.quantity == newCartItem.quantity)
         if (cartItem.totalMealPrice == newCartItem.totalMealPrice)
           if (listEquals(cartItem.selectedExtras, newCartItem.selectedExtras))
@@ -94,5 +95,22 @@ class CartProvider with ChangeNotifier {
     double subtotal = 0;
     for (var item in _cartList) subtotal += item.totalMealPrice;
     return subtotal;
+  }
+
+  savePreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String _encodedCart = CartItem.encodeCartList(_cartList); //Serializes List object into String
+    prefs.setString("cartList", _encodedCart);
+  }
+
+  loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String _encodedCart = prefs.getString("cartList");
+
+    if (_encodedCart != null) {
+      _cartList = CartItem.decodeCartList(_encodedCart); //De-serializes into the List Object
+      notifyListeners();
+      savePreferences();
+    }
   }
 }

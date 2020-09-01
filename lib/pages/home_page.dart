@@ -1,4 +1,5 @@
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
+import 'package:chop_chop_flutter/data_search.dart';
 import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
 import 'package:chop_chop_flutter/screen_elements/cards/column_card.dart';
 import 'package:chop_chop_flutter/screen_elements/card_decks/category_card_deck.dart';
@@ -11,8 +12,6 @@ import 'package:chop_chop_flutter/temp_data/temp_restaurants_lists.dart';
 import 'package:chop_chop_flutter/temp_data/temp_top_choices_lists.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../data_search.dart';
 
 class HomePage extends StatelessWidget {
   @override

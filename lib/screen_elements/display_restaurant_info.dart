@@ -22,15 +22,15 @@ class DisplayRestaurantInfo extends StatelessWidget {
     int deliveryFee;
 
     if (mealItem != null){
-      bigTitleName = mealItem.mealName;
-      basePrice = mealItem.mealBasePrice;
-      description = mealItem.mealDescription;
-      estDeliveryTime = mealItem.estimatedDeliveryTime;
+      bigTitleName = mealItem.name;
+      basePrice = mealItem.basePrice;
+      description = mealItem.description;
+      estDeliveryTime = mealItem.estDeliveryTime;
       deliveryFee = mealItem.deliveryFee;
     }
     else{
-      bigTitleName = restaurantItem.restaurantName;
-      description = restaurantItem.restaurantDescription;
+      bigTitleName = restaurantItem.name;
+      description = restaurantItem.description;
       estDeliveryTime = restaurantItem.estimatedDeliveryTime;
       deliveryFee = restaurantItem.deliveryFee;
     }

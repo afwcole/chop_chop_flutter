@@ -9,24 +9,24 @@ class RestaurantItemList {
 
 class RestaurantItem {
   final int id;
-  final String restaurantHeaderImage;
-  final String restaurantLogo;
-  final String restaurantName;
-  final String restaurantDescription;
+  final String headerImage;
+  final String logoImage;
+  final String name;
+  final String description;
   final int estimatedDeliveryTime;
   final int deliveryFee;
-  List<MealItem> restaurantMenu;
-  String restaurantContactNumber;
+  final List<MealItem> restaurantMenu;
+  final String contactNumber;
 
   RestaurantItem({
     @required this.id,
-    @required this.restaurantHeaderImage,
-    @required this.restaurantLogo,
-    @required this.restaurantName,
-    @required this.restaurantDescription,
+    @required this.headerImage,
+    @required this.logoImage,
+    @required this.name,
+    @required this.description,
     @required this.estimatedDeliveryTime,
     @required this.deliveryFee,
     this.restaurantMenu,
-    this.restaurantContactNumber,
+    this.contactNumber,
   });
 }

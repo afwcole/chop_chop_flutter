@@ -1,4 +1,5 @@
 import 'package:chop_chop_flutter/data_model/cart_item.dart';
+import 'package:chop_chop_flutter/pages/meal_profile_page.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class CartMealTile extends StatelessWidget {
         .width * 0.35;
 
     var cartProvider = Provider.of<CartProvider>(context);
-    String mealName = cartItem.mealItem.mealName;
+    String mealName = cartItem.mealItem.name;
     String restaurantName = cartItem.mealItem.restaurantName;
     double price = cartItem.totalMealPrice;
 
@@ -36,9 +37,18 @@ class CartMealTile extends StatelessWidget {
             builder: (context) =>
                 RawMaterialButton(
                   onPressed: () {
-                      Scaffold.of(context).showSnackBar(
-                          new SnackBar(content: Text("Edit")));
-                      Slidable.of(context).close();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MealProfilePage(
+                                cartItem: cartItem,
+                              )
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(
+                        new SnackBar(content: Text("Edit")));
+                    Slidable.of(context).close();
                   },
                   elevation: 1.0,
                   fillColor: Colors.white30,

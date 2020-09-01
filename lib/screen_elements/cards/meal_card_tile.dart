@@ -13,10 +13,10 @@ class MealCardTile extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     double textWidth = MediaQuery.of(context).size.width*0.35;
-    String mealName = mealItem.mealName;
+    String mealName = mealItem.name;
     String restaurantName = mealItem.restaurantName;
-    String imageURL = mealItem.mealImage;
-    double price = mealItem.mealBasePrice;
+    String imageURL = mealItem.image;
+    double price = mealItem.basePrice;
 
     return GestureDetector(
       onTap: (){

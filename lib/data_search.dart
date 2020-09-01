@@ -50,7 +50,7 @@ class DataSearch extends SearchDelegate<String> {
 
     return ListView.builder(
       itemBuilder: (context, index) {
-        if (suggestionList[index].mealName.toLowerCase().contains(query.toLowerCase())) {
+        if (suggestionList[index].name.toLowerCase().contains(query.toLowerCase())) {
           return ListTile(
             onTap: () {
               Navigator.push(
@@ -64,7 +64,7 @@ class DataSearch extends SearchDelegate<String> {
             },
             leading: Icon(Icons.fastfood),
             title: Text(
-              suggestionList[index].mealName,
+              suggestionList[index].name,
               style: Theme.of(context).textTheme.display1,
             ),
             subtitle: Text(suggestionList[index].restaurantName),
