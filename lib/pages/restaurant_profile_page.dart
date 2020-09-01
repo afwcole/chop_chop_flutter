@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:chop_chop_flutter/data_model/restaurant_item.dart';
-import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
-import 'package:chop_chop_flutter/screen_elements/buttons/pop_arrow_button.dart';
-import 'package:chop_chop_flutter/screen_elements/cards/meal_card_tile.dart';
-import 'package:chop_chop_flutter/screen_elements/display_restaurant_info.dart';
-import 'package:chop_chop_flutter/screen_elements/header_and_logo.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/buttons/cart_fab.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/buttons/pop_arrow_button.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/cards/meal_card_tile.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/display_restaurant_info.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/header_and_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 

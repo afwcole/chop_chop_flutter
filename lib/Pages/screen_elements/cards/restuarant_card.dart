@@ -28,7 +28,7 @@ class RestaurantCard extends StatelessWidget {
           width: 232,
           child: Card(
             elevation: 3,
-            margin: EdgeInsets.only(left: 8, right: 8),
+            margin: EdgeInsets.symmetric(horizontal: 6),
             //padding around each card left & right
             semanticContainer: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,

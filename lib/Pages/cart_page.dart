@@ -1,6 +1,6 @@
-import 'package:chop_chop_flutter/screen_elements/cart_meal_tile.dart';
+import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/pages/screen_elements/tiles/cart_meal_tile.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/title.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
-import 'package:chop_chop_flutter/screen_elements/title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

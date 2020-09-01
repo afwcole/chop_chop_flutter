@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/screen_elements/cards/category_card.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/cards/category_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

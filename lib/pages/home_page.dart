@@ -1,12 +1,11 @@
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/data_search.dart';
-import 'package:chop_chop_flutter/screen_elements/buttons/cart_fab.dart';
-import 'package:chop_chop_flutter/screen_elements/cards/column_card.dart';
-import 'package:chop_chop_flutter/screen_elements/card_decks/category_card_deck.dart';
-import 'package:chop_chop_flutter/screen_elements/card_decks/meal_card_deck.dart';
-import 'package:chop_chop_flutter/screen_elements/card_decks/restaurant_card_deck.dart';
-import 'package:chop_chop_flutter/screen_elements/standard_drawer.dart';
-import 'package:chop_chop_flutter/screen_elements/title.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/buttons/cart_fab.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/card_decks/category_card_deck.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/cards/column_card.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/carousel.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/standard_drawer.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/title.dart';
 import 'package:chop_chop_flutter/temp_data/temp_more_choices_lists.dart';
 import 'package:chop_chop_flutter/temp_data/temp_restaurants_lists.dart';
 import 'package:chop_chop_flutter/temp_data/temp_top_choices_lists.dart';
@@ -40,13 +39,15 @@ class HomePage extends StatelessWidget {
                 SizedBox(height: 24),
                 CategoryCardDeck(),
                 SizedBox(height: 26),
-                RestaurantCardDeck(
-                  deckTitle: "Restaurants",
-                  restaurantItemList: tempRestaurantList,
-                ),
+                Carousel(
+                    deckTitle: "Restaurants",
+                    itemList: tempRestaurantList.restaurantItems,
+                    isMealCard: false),
                 SizedBox(height: 26),
-                MealCardDeck(
-                    deckTitle: "Top Choices", mealItemList: tempTopChoicesList),
+                Carousel(
+                    deckTitle: "Top Choices",
+                    itemList: tempTopChoicesList.mealItems,
+                    isMealCard: true),
                 SizedBox(height: 26),
                 Container(
                   alignment: Alignment.centerLeft,
