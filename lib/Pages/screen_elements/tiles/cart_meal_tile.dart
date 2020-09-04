@@ -47,7 +47,7 @@ class CartMealTile extends StatelessWidget {
                       ),
                     );
                     Scaffold.of(context).showSnackBar(
-                        new SnackBar(content: Text("Edit")));
+                        new SnackBar(content: Text("Edit"), duration: Duration(seconds: 1),));
                     Slidable.of(context).close();
                   },
                   elevation: 1.0,
