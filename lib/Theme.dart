@@ -46,6 +46,7 @@ ThemeData basicTheme() {
     appBarTheme: _basicAppBarTheme(base.appBarTheme),
     textTheme: _basicTextTheme(base.textTheme),
     primaryColor: Color(0xFFE2993A),
+    bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent, elevation: 20)
   );
 }
 

@@ -7,6 +7,7 @@ import 'package:chop_chop_flutter/pages/screen_elements/buttons/cart_fab.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/buttons/pop_arrow_button.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/display_restaurant_info.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/header_and_logo.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/my_custom_draggable_sheet.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/tiles/checkbox_extras_tile.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
@@ -58,72 +59,73 @@ class _MealProfilePageState extends State<MealProfilePage> {
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
 
-    return Scaffold(
-        body: SafeArea(
-          child: Stack(children: <Widget>[
-            CustomScrollView(slivers: <Widget>[
-              SliverAppBar(
-                backgroundColor: Colors.transparent,
-                leading: PopArrowButton(),
-                elevation: 0,
-                expandedHeight: 200,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                    background: HeaderAndLogo(mealItem: _mealItem,),),
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate([
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          leading: PopArrowButton(),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Stack(
+          children: <Widget>[
+            HeaderAndLogo(
+              mealItem: _mealItem,
+            ),
+            MyCustomDraggableSheet(
+              child: Container(
+                color: Colors.white,
+                margin: EdgeInsets.only(top: 2),
+                padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
+                child: Column(children: <Widget>[
+                  DisplayRestaurantInfo(mealItem: _mealItem),
+                  SizedBox(height: 32),
                   Container(
-                    color: Colors.white,
-                    margin: EdgeInsets.only(top: 2),
-                    padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
-                    child: Column(children: <Widget>[
-                      DisplayRestaurantInfo(mealItem: _mealItem),
-                      SizedBox(height: 32),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text("Extras",
-                            style: themeStyle.textTheme.subhead.copyWith(
-                                decoration: TextDecoration.underline)),
-                      ),
-                      CheckboxGroup(
-                        checked: getExtrasNameList(_selectedExtras),
-                        activeColor: Theme.of(context).primaryColor,
-                        onChange: ((bool isChecked, String label, int index) {
-                          setState((){
-                            if (isChecked) {
-                              _totalExtrasPrice +=
-                                  _mealItem.extrasList[index].price;
-                            } else {
-                              _totalExtrasPrice -=
-                                  _mealItem.extrasList[index].price;
-                            }
-
-                            _totalMealPrice =
-                                (_mealBasePrice + _totalExtrasPrice) *
-                                    _quantity;
-                          });
-                        }),
-                        onSelected: ((List<String> checked) {
-                          _selectedExtras = _getSelectedExtras(checked);
-                        }),
-                        labels: _mealItem.listExtrasNames(),
-                        itemBuilder: (Checkbox cb, Text text, int index) {
-                          return CheckboxExtrasTile(
-                              checkbox: cb,
-                              text: text,
-                              price: _mealItem.extrasList[index].price);
-                        },
-                      ),
-                    ]),
+                    alignment: Alignment.centerLeft,
+                    child: Text("Extras",
+                      style: themeStyle.textTheme.subhead.copyWith(
+                            decoration: TextDecoration.underline)),
                   ),
+                  CheckboxGroup(
+                    checked: getExtrasNameList(_selectedExtras),
+                    activeColor: Theme.of(context).primaryColor,
+                    onChange: ((bool isChecked, String label, int index) {
+                      setState((){
+                        if (isChecked) {
+                          _totalExtrasPrice +=
+                              _mealItem.extrasList[index].price;
+                        } else {
+                          _totalExtrasPrice -=
+                              _mealItem.extrasList[index].price;
+                        }
+
+                        _totalMealPrice =
+                            (_mealBasePrice + _totalExtrasPrice) *
+                                _quantity;
+                      });
+                    }),
+                    onSelected: ((List<String> checked) {
+                      _selectedExtras = _getSelectedExtras(checked);
+                    }),
+                    labels: _mealItem.listExtrasNames(),
+                    itemBuilder: (Checkbox cb, Text text, int index) {
+                      return CheckboxExtrasTile(
+                        checkbox: cb,
+                        text: text,
+                        price: _mealItem.extrasList[index].price
+                      );
+                    },
+                  ),
+                  SizedBox(height: 40,),
                 ]),
               ),
-            ]),
-          ]),
-        ),
-        floatingActionButton: CartFAB(),
-        bottomNavigationBar: bottomButtons(context));
+            ),
+          ],
+        ),  
+        floatingActionButton: bottomButtons(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      ),
+    );
   }
 
   List<String> getExtrasNameList(List<ExtrasItem> selectedExtras) {

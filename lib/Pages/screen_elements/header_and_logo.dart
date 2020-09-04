@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class HeaderAndLogo extends StatelessWidget {
   final MealItem mealItem;
   final RestaurantItem restaurantItem;
-
+  
   HeaderAndLogo({
     this.mealItem,
     this.restaurantItem,
@@ -23,11 +23,11 @@ class HeaderAndLogo extends StatelessWidget {
         : restaurantItem.logoImage;
 
     return Container(
-      height: 230,
+      height: MediaQuery.of(context).size.height * 0.5,
       child: Stack(
         children: <Widget>[
           Container(
-            height: 230,
+            height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             child: Image.asset(
               _headerImageUrl,
@@ -56,9 +56,9 @@ class HeaderAndLogo extends StatelessWidget {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            boxShadow: [BoxShadow(blurRadius: 15.0)]),
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [BoxShadow(blurRadius: 15.0)]),
                       ),
                       Container(
                         width: 90,
@@ -66,9 +66,9 @@ class HeaderAndLogo extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: new DecorationImage(
-                              image: AssetImage(
-                                  _logoImageUrl == null ? " " : _logoImageUrl),
-                              fit: BoxFit.fill),
+                            image: AssetImage(
+                                _logoImageUrl == null ? " " : _logoImageUrl),
+                            fit: BoxFit.fill),
                         ),
                       ),
                     ],
