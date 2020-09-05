@@ -1,4 +1,4 @@
-import 'file:///C:/Users/Adria/IdeaProjects/chop_chop_flutter/lib/pages/screen_elements/tiles/cart_meal_tile.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/tiles/cart_meal_tile.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/title.dart';
 import 'package:chop_chop_flutter/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -106,7 +106,7 @@ class CartPage extends StatelessWidget {
           onPressed: () => Scaffold.of(context).showSnackBar(
               new SnackBar(content: Text("Your Order Has Been Placed!"))),
           child: Text(
-            "Checkout",
+            "Place Order",
             style: Theme.of(context).textTheme.button,
           ),
         ),
