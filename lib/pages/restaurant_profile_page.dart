@@ -53,8 +53,10 @@ class RestaurantProfilePage extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     for (int index = 0; index < restaurantItem.restaurantMenu.length; index++)
-                      MealCardTile(
-                          mealItem: restaurantItem.restaurantMenu[index]),
+                      MealCardTile(mealItem: restaurantItem.restaurantMenu[index]),
+                    SizedBox(
+                      height: 30,
+                    ),
                   ],
                 ),
               )
@@ -62,6 +64,7 @@ class RestaurantProfilePage extends StatelessWidget {
           ],
         ),
         floatingActionButton: CartFAB(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }

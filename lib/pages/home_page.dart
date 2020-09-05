@@ -61,11 +61,16 @@ class HomePage extends StatelessWidget {
                     children: <Widget>[
                       for (MealItem mealItem in tempMoreChoicesList.mealItems)
                         ColumnCard(mealItem: mealItem),
+                      
+                      SizedBox(
+                        height: 50,
+                      ),
                     ],
                   ),
                 )
               ]))),
       floatingActionButton: CartFAB(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

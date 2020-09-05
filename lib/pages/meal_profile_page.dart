@@ -117,7 +117,7 @@ class _MealProfilePageState extends State<MealProfilePage> {
                     },
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 50,
                   ),
                 ]),
               ),
