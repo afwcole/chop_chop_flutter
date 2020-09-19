@@ -1,9 +1,9 @@
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
 import 'package:chop_chop_flutter/data_search.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/buttons/cart_fab.dart';
-import 'package:chop_chop_flutter/pages/screen_elements/card_decks/category_card_deck.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/cards/column_card.dart';
-import 'package:chop_chop_flutter/pages/screen_elements/carousel.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/carousel/carousel.dart';
+import 'package:chop_chop_flutter/pages/screen_elements/carousel/category_card_deck.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/standard_drawer.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/title.dart';
 import 'package:chop_chop_flutter/temp_data/temp_more_choices_lists.dart';
