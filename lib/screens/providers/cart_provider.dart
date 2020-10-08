@@ -47,7 +47,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setHostelName(String selectedHostelName){
+  void setHostelName(String selectedHostelName) {
     _hostelName = selectedHostelName;
     notifyListeners();
   }
@@ -57,8 +57,8 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addToCartList(CartItem cartItem){
-    if(safeToAdd(cartItem)){
+  void addToCartList(CartItem cartItem) {
+    if (safeToAdd(cartItem)) {
       _cartList.add(cartItem);
       notifyListeners();
       savePreferences();
@@ -82,16 +82,18 @@ class CartProvider with ChangeNotifier {
     return true;
   }
 
-  bool _sameCartItem(CartItem cartItem, CartItem newCartItem){
-    if(cartItem.mealItem.name == newCartItem.mealItem.name)
-      if (cartItem.quantity == newCartItem.quantity)
-        if (cartItem.totalMealPrice == newCartItem.totalMealPrice)
-          if (listEquals(cartItem.selectedExtras, newCartItem.selectedExtras))
-            return true;
+  bool _sameCartItem(CartItem cartItem, CartItem newCartItem) {
+    if (cartItem.mealItem.name == newCartItem.mealItem.name) if (cartItem
+            .quantity ==
+        newCartItem.quantity) if (cartItem
+            .totalMealPrice ==
+        newCartItem
+            .totalMealPrice) if (listEquals(
+        cartItem.selectedExtras, newCartItem.selectedExtras)) return true;
     return false;
   }
 
-  double getSubtotal(){
+  double getSubtotal() {
     double subtotal = 0;
     for (var item in _cartList) subtotal += item.totalMealPrice;
     return subtotal;
@@ -99,7 +101,8 @@ class CartProvider with ChangeNotifier {
 
   savePreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String _encodedCart = CartItem.encodeCartList(_cartList); //Serializes List object into String
+    //Serializes List object into String
+    String _encodedCart = CartItem.encodeCartList(_cartList);
     prefs.setString("cartList", _encodedCart);
   }
 
@@ -108,7 +111,8 @@ class CartProvider with ChangeNotifier {
     String _encodedCart = prefs.getString("cartList");
 
     if (_encodedCart != null) {
-      _cartList = CartItem.decodeCartList(_encodedCart); //De-serializes into the List Object
+      //De-serializes into the List Object
+      _cartList = CartItem.decodeCartList(_encodedCart);
       notifyListeners();
       savePreferences();
     }

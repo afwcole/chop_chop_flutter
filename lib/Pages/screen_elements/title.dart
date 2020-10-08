@@ -8,15 +8,21 @@ Widget title(String firstString, String secondWord) {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(firstString,
+          Text(
+            firstString,
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 25,
               color: Color(0xFFA2A2A2),
             ),
           ),
-          Text(secondWord,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30,),),
+          Text(
+            secondWord,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 30,
+            ),
+          ),
         ],
       ),
     ],

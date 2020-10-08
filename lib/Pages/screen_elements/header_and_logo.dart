@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class HeaderAndLogo extends StatelessWidget {
   final MealItem mealItem;
   final RestaurantItem restaurantItem;
-  
+
   HeaderAndLogo({
     this.mealItem,
     this.restaurantItem,
@@ -15,12 +15,9 @@ class HeaderAndLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _headerImageUrl = mealItem != null
-        ? mealItem.image
-        : restaurantItem.headerImage;
-    String _logoImageUrl = mealItem != null
-        ? null
-        : restaurantItem.logoImage;
+    String _headerImageUrl =
+        mealItem != null ? mealItem.image : restaurantItem.headerImage;
+    String _logoImageUrl = mealItem != null ? null : restaurantItem.logoImage;
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.5,
@@ -56,9 +53,9 @@ class HeaderAndLogo extends StatelessWidget {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          boxShadow: [BoxShadow(blurRadius: 15.0)]),
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(blurRadius: 15.0)]),
                       ),
                       Container(
                         width: 90,
@@ -66,9 +63,9 @@ class HeaderAndLogo extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: new DecorationImage(
-                            image: AssetImage(
-                                _logoImageUrl == null ? " " : _logoImageUrl),
-                            fit: BoxFit.fill),
+                              image: AssetImage(
+                                  _logoImageUrl == null ? " " : _logoImageUrl),
+                              fit: BoxFit.fill),
                         ),
                       ),
                     ],

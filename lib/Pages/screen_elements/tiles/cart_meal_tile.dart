@@ -1,6 +1,6 @@
 import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/pages/meal_profile_page.dart';
-import 'package:chop_chop_flutter/providers/cart_provider.dart';
+import 'package:chop_chop_flutter/screens/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -16,10 +16,7 @@ class CartMealTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeStyle = Theme.of(context);
-    double textWidth = MediaQuery
-        .of(context)
-        .size
-        .width * 0.35;
+    double textWidth = MediaQuery.of(context).size.width * 0.35;
 
     var cartProvider = Provider.of<CartProvider>(context);
     String mealName = cartItem.mealItem.name;
@@ -34,68 +31,65 @@ class CartMealTile extends StatelessWidget {
         IconSlideAction(
           color: Colors.transparent,
           iconWidget: Builder(
-            builder: (context) =>
-                RawMaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              MealProfilePage(
-                                cartItem: cartItem,
-                              )
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(
-                        new SnackBar(content: Text("Edit"), duration: Duration(seconds: 1),));
-                    Slidable.of(context).close();
-                  },
-                  elevation: 1.0,
-                  fillColor: Colors.white30,
-                  child: Icon(
-                    Icons.edit,
-                    size: 20.0,
-                  ),
-                  padding: EdgeInsets.all(10.0),
-                  shape: CircleBorder(),
-                ),
+            builder: (context) => RawMaterialButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MealProfilePage(
+                            cartItem: cartItem,
+                          )),
+                );
+                Scaffold.of(context).showSnackBar(new SnackBar(
+                  content: Text("Edit"),
+                  duration: Duration(seconds: 1),
+                ));
+                Slidable.of(context).close();
+              },
+              elevation: 1.0,
+              fillColor: Colors.white30,
+              child: Icon(
+                Icons.edit,
+                size: 20.0,
+              ),
+              padding: EdgeInsets.all(10.0),
+              shape: CircleBorder(),
+            ),
           ),
         ),
         IconSlideAction(
           color: Colors.transparent,
           iconWidget: Builder(
-            builder: (context) =>
-                RawMaterialButton(
-                  onPressed: () {
-                    Slidable.of(context).close();
-                    cartProvider.removeFromCartList(cartItem);
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Delete"),
-                        duration: Duration(seconds: 1),
-                        action: SnackBarAction(label: "Undo", onPressed: () {
-                          return cartProvider.addToCartList(cartItem);
-                        },)));
-                  },
-                  elevation: 1.0,
-                  fillColor: Colors.red,
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: 20.0,
-                  ),
-                  padding: EdgeInsets.all(10.0),
-                  shape: CircleBorder(),
-                ),
+            builder: (context) => RawMaterialButton(
+              onPressed: () {
+                Slidable.of(context).close();
+                cartProvider.removeFromCartList(cartItem);
+                Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("Delete"),
+                    duration: Duration(seconds: 1),
+                    action: SnackBarAction(
+                      label: "Undo",
+                      onPressed: () {
+                        return cartProvider.addToCartList(cartItem);
+                      },
+                    )));
+              },
+              elevation: 1.0,
+              fillColor: Colors.red,
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+                size: 20.0,
+              ),
+              padding: EdgeInsets.all(10.0),
+              shape: CircleBorder(),
+            ),
           ),
         ),
       ],
       child: Container(
         height: 68,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(horizontal: 37),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,8 +106,7 @@ class CartMealTile extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "${cartItem.quantity}",
-                      style: Theme
-                          .of(context)
+                      style: Theme.of(context)
                           .textTheme
                           .display3
                           .copyWith(color: Colors.white),
@@ -130,18 +123,14 @@ class CartMealTile extends StatelessWidget {
                       child: Text(
                         mealName,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .subtitle,
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ),
                     Container(
                       width: textWidth,
                       child: Text(restaurantName,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme
-                              .of(context)
+                          style: Theme.of(context)
                               .textTheme
                               .display4
                               .copyWith(color: themeStyle.primaryColor)),

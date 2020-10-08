@@ -15,12 +15,11 @@ class RestaurantCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => RestaurantProfilePage(
-                      restaurantItem: restaurantItem,
-                    )
-            ),
+          context,
+          MaterialPageRoute(
+              builder: (context) => RestaurantProfilePage(
+                    restaurantItem: restaurantItem,
+                  )),
         );
       },
       child: Container(

@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/providers/cart_provider.dart';
+import 'package:chop_chop_flutter/screens/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +48,8 @@ class DeliveryExpansionTile extends StatelessWidget {
                         onChanged: (String value) {
                           _cartProvider.setHostelName(value);
                         },
-                        items: _cartProvider.hostels.map<DropdownMenuItem<String>>((String value) {
+                        items: _cartProvider.hostels
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(

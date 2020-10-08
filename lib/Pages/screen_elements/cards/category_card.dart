@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/pages/cart_page.dart';
+import 'package:chop_chop_flutter/screens/access/onboarding_page.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -12,7 +12,7 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CartPage()));
+            context, MaterialPageRoute(builder: (context) => OnboardingPage()));
       },
       child: Container(
         height: 96,
@@ -24,22 +24,18 @@ class CategoryCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imageDirName),
-                  fit: BoxFit.cover,
-                )
-            ),
+              image: AssetImage(imageDirName),
+              fit: BoxFit.cover,
+            )),
             child: Container(
               margin: EdgeInsets.fromLTRB(8, 0, 0, 8), //text-padding in card
               alignment: Alignment.bottomLeft,
               child: Text(
                 categoryName,
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
                     .subtitle
-                    .copyWith(
-                    color: Colors.white
-                ),
+                    .copyWith(color: Colors.white),
               ),
             ),
           ),
@@ -47,5 +43,4 @@ class CategoryCard extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -14,30 +14,30 @@ class MyCustomDraggableSheet extends StatelessWidget {
       initialChildSize: 0.55,
       builder: (context, controller) {
         return Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
+                topLeft: Radius.circular(25),
+                topRight: Radius.circular(25),
+              ),
             ),
-          ),
-          child: ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return LinearGradient(
+            child: ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return LinearGradient(
                   stops: [0.0, 0.1],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: <Color>[Colors.transparent, Colors.white],
-              ).createShader(bounds);
-            },
-            blendMode: BlendMode.dstATop,
+                ).createShader(bounds);
+              },
+              blendMode: BlendMode.dstATop,
               child: SingleChildScrollView(
-              controller: controller,
-              child: child, //Where the widget is passed in and placed
-            ),
-          )
-        );
+                controller: controller,
+                child: child, 
+                //Where the widget is passed in and placed
+              ),
+            ));
       },
     );
   }

@@ -34,33 +34,35 @@ class RestaurantProfilePage extends StatelessWidget {
               restaurantItem: restaurantItem,
             ),
             MyCustomDraggableSheet(
-              child: Container(
-                color: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-                child: Column(
-                  children: <Widget>[
-                    DisplayRestaurantInfo(
-                      restaurantItem: restaurantItem,
+                child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+              child: Column(
+                children: <Widget>[
+                  DisplayRestaurantInfo(
+                    restaurantItem: restaurantItem,
+                  ),
+                  SizedBox(height: 32),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Menu",
+                      style: themeStyle.textTheme.subhead
+                          .copyWith(decoration: TextDecoration.underline),
                     ),
-                    SizedBox(height: 32),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Menu",
-                        style: themeStyle.textTheme.subhead
-                            .copyWith(decoration: TextDecoration.underline),
-                      ),
-                    ),
-                    SizedBox(height: 24),
-                    for (int index = 0; index < restaurantItem.restaurantMenu.length; index++)
-                      MealCardTile(mealItem: restaurantItem.restaurantMenu[index]),
-                    SizedBox(
-                      height: 30,
-                    ),
-                  ],
-                ),
-              )
-            ),
+                  ),
+                  SizedBox(height: 24),
+                  for (int index = 0;
+                      index < restaurantItem.restaurantMenu.length;
+                      index++)
+                    MealCardTile(
+                        mealItem: restaurantItem.restaurantMenu[index]),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+            )),
           ],
         ),
         floatingActionButton: CartFAB(),

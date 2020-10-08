@@ -33,10 +33,10 @@ class MealCardTile extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Color(0x33000000),
-              blurRadius: 8.0,
-              spreadRadius: 5.0,
-              offset: Offset(0.0, 3.0))
+                color: Color(0x33000000),
+                blurRadius: 8.0,
+                spreadRadius: 5.0,
+                offset: Offset(0.0, 3.0))
           ],
           borderRadius: BorderRadius.circular(5),
         ),

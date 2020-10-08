@@ -1,7 +1,7 @@
 import 'package:chop_chop_flutter/data_model/cart_item.dart';
 import 'package:chop_chop_flutter/data_model/extras_item.dart';
 import 'package:chop_chop_flutter/data_model/meal_item.dart';
-import 'package:chop_chop_flutter/providers/cart_provider.dart';
+import 'package:chop_chop_flutter/screens/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -115,7 +115,8 @@ class _BottomButtonsState extends State<BottomButtons> {
         );
 
         if (_cartProvider.safeToAdd(finalCartItem)) {
-          if(isEdit){ //removes old cart item from the cart first
+          if (isEdit) {
+            //removes old cart item from the cart first
             _cartProvider.removeFromCartList(widget.cartItem);
           }
 

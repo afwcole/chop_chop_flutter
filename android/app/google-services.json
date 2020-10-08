@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "545445304909",
+    "firebase_url": "https://chop-chop-aa4c6.firebaseio.com",
+    "project_id": "chop-chop-aa4c6",
+    "storage_bucket": "chop-chop-aa4c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545445304909:android:141dccb9d4016794b49a04",
+        "android_client_info": {
+          "package_name": "com.example.chop_chop_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545445304909-f1qrotdiruc5jt0hb0802evemlvhrjl0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chop_chop_flutter",
+            "certificate_hash": "d7dcb0afc85dbd5f76662c642b7e745cd02b3e2d"
+          }
+        },
+        {
+          "client_id": "545445304909-v7qs683ibo3gesg2bbjm9l7uspfbcl3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfyWAc56fTWB3WR-AnXb3kZkiXd6Oxv4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545445304909-v7qs683ibo3gesg2bbjm9l7uspfbcl3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,10 +3,9 @@ import 'package:chop_chop_flutter/pages/screen_elements/tiles/cart_meal_tile.dar
 import 'package:chop_chop_flutter/pages/screen_elements/tiles/delivery_expansion_tile.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/tiles/payment_expansion_tile.dart';
 import 'package:chop_chop_flutter/pages/screen_elements/title.dart';
-import 'package:chop_chop_flutter/providers/cart_provider.dart';
+import 'package:chop_chop_flutter/screens/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {

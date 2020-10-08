@@ -1,4 +1,4 @@
-import 'package:chop_chop_flutter/providers/cart_provider.dart';
+import 'package:chop_chop_flutter/screens/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,7 +6,7 @@ class PaymentExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _cartProvider = Provider.of<CartProvider>(context);
-    
+
     return ExpansionTile(
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,

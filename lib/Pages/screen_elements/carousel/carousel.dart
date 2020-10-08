@@ -60,7 +60,8 @@ class _CarouselState extends State<Carousel> {
         ),
         SizedBox(height: 8),
         Container(
-          height: _isMealCard ? 220 : 158, //different sizes required to not crop the corresponding cards.
+          //different sizes required to not crop the corresponding cards.
+          height: _isMealCard ? 220 : 158, 
           child: ListView.builder(
             controller: _controller,
             physics: _physics,

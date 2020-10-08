@@ -21,14 +21,13 @@ class DisplayRestaurantInfo extends StatelessWidget {
     int estDeliveryTime;
     int deliveryFee;
 
-    if (mealItem != null){
+    if (mealItem != null) {
       bigTitleName = mealItem.name;
       basePrice = mealItem.basePrice;
       description = mealItem.description;
       estDeliveryTime = mealItem.estDeliveryTime;
       deliveryFee = mealItem.deliveryFee;
-    }
-    else{
+    } else {
       bigTitleName = restaurantItem.name;
       description = restaurantItem.description;
       estDeliveryTime = restaurantItem.estimatedDeliveryTime;
@@ -43,7 +42,11 @@ class DisplayRestaurantInfo extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.65,
               alignment: Alignment.centerLeft,
-              child: Text(bigTitleName, style: themeStyle.textTheme.headline, overflow: TextOverflow.fade,),
+              child: Text(
+                bigTitleName,
+                style: themeStyle.textTheme.headline,
+                overflow: TextOverflow.fade,
+              ),
             ),
             Visibility(
               visible: basePrice != null,
@@ -61,7 +64,10 @@ class DisplayRestaurantInfo extends StatelessWidget {
         SizedBox(height: 8),
         Container(
           alignment: Alignment.topCenter,
-          child: Text(description, style: themeStyle.textTheme.body1,),
+          child: Text(
+            description,
+            style: themeStyle.textTheme.body1,
+          ),
         ),
         SizedBox(height: 12),
         Row(
@@ -71,15 +77,17 @@ class DisplayRestaurantInfo extends StatelessWidget {
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(color: Color(0x80C2791A)),
               child: Text(
-                "Time: $estDeliveryTime mins", style: themeStyle.textTheme.display2,),
+                "Time: $estDeliveryTime mins",
+                style: themeStyle.textTheme.display2,
+              ),
             ),
             SizedBox(width: 12),
             Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(color: Color(0x80C2791A)),
-              child: Text(
-                  "Delivery Fee: Ghs $deliveryFee", style: themeStyle.textTheme.display2),
+              child: Text("Delivery Fee: Ghs $deliveryFee",
+                  style: themeStyle.textTheme.display2),
             ),
           ],
         ),
