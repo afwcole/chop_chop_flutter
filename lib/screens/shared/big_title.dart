@@ -18,8 +18,8 @@ class BigTitle extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           children: <TextSpan>[
-            TextSpan(text: firstLine + "\n",),
-            TextSpan(text: secondLine,),
+            TextSpan(text: firstLine,),
+            TextSpan(text: secondLine == null ? null : "\n" + secondLine,),
           ]
         ),
       ),

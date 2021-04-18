@@ -1,9 +1,7 @@
-import 'package:chop_chop_flutter/pages/home_page.dart';
-import 'package:chop_chop_flutter/screens/services/auth.dart';
 import 'package:chop_chop_flutter/screens/shared/big_title.dart';
 import 'package:chop_chop_flutter/screens/shared/call_to_action_button.dart';
 import 'package:chop_chop_flutter/screens/shared/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chop_chop_flutter/screens/shared/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -14,10 +12,12 @@ class NameDetailsPage extends StatefulWidget {
 
 class _NameDetailsPageState extends State<NameDetailsPage> {
   final _signUpFormKey = GlobalKey<FormState>();
-  String _firstName, _lastName;
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
 
-  AuthService _authService = AuthService();
-
+  FocusNode _firstNameFocusNode = FocusNode();
+  FocusNode _lastNameFocusNode = FocusNode();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,27 +38,23 @@ class _NameDetailsPageState extends State<NameDetailsPage> {
               BigTitle(firstLine: "Enter", secondLine: "Your Name"),
               SizedBox(height: 36,),
               TextFormField(
-                style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.normal),
-                decoration: textInputDecoration.copyWith(
-                    labelText: "First Name"),
-                validator: (val) =>
-                    val.isEmpty ? "Please provide your first name" : null,
-                onChanged: (val) {
-                  setState(() => _firstName = val);
+                focusNode: _firstNameFocusNode,
+                controller: _firstNameController,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                decoration: textInputDecoration.copyWith(labelText: "First Name"),
+                validator: (firstName) =>
+                    firstName.isEmpty ? "Please provide your first name" : null,
+                onFieldSubmitted: (firstName) {
+                  fieldFocusChange(context, _firstNameFocusNode, _lastNameFocusNode);
                 },
               ),
               SizedBox(height: 32),
               TextFormField(
-                style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.normal),
-                decoration:
-                    textInputDecoration.copyWith(labelText: "Last Name"),
-                validator: (val) =>
-                    val.isEmpty ? "Enter yout last name" : null,
-                onChanged: (val) {
-                  setState(() => _lastName= val);
-                },
+                focusNode: _lastNameFocusNode,
+                controller: _lastNameController,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                decoration: textInputDecoration.copyWith(labelText: "Last Name"),
+                validator: (lastName) => lastName.isEmpty ? "Enter yout last name" : null,
               ),
             ],
           ),
@@ -72,11 +68,8 @@ class _NameDetailsPageState extends State<NameDetailsPage> {
             CallToActionButton(
               buttonText: "Complete Sign Up",
               onPressed: () async {
-                User myUser = _authService.auth.currentUser;
                 if (_signUpFormKey.currentState.validate()) {
-                  print("Yayyy $_firstName Welcome to Chop Chop Mr. $_lastName");
-                  myUser.updateProfile(displayName: "$_firstName $_lastName");
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                  print("Update Profile");
                 }
               },
             ),

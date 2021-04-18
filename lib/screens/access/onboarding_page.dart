@@ -1,4 +1,5 @@
-import 'package:chop_chop_flutter/screens/access/signup/enter_phone_number.dart';
+import 'package:chop_chop_flutter/screens/access/sign_in/sign_in_page.dart';
+import 'package:chop_chop_flutter/screens/access/sign_up/sign_up_page.dart';
 import 'package:chop_chop_flutter/screens/shared/call_to_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -86,13 +87,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => EnterNumberPage()));
+                              builder: (context) => SignUpPage()));
                       },
                     ),
                     SizedBox(height: 32),
                     GestureDetector(
                       onTap: () {
-                        print("You just tapped to sign in");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignInPage()));
                       },
                       child: RichText(
                         text: TextSpan(

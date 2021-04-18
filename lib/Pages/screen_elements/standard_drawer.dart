@@ -1,5 +1,7 @@
+import 'package:chop_chop_flutter/screens/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class StandardDrawer extends StatelessWidget {
   @override
@@ -96,9 +98,9 @@ class StandardDrawer extends StatelessWidget {
                   color: Colors.black87,
                 ),
                 title:
-                    Text("Help", style: Theme.of(context).textTheme.subtitle),
+                    Text("Logout", style: Theme.of(context).textTheme.subtitle),
                 onTap: () {
-                  Navigator.of(context).pop();
+                  context.read<AuthService>().signOut();
                 },
               ),
             ],

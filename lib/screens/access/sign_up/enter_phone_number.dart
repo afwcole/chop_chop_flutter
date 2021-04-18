@@ -1,9 +1,11 @@
-import 'package:chop_chop_flutter/screens/services/auth.dart';
+import 'package:chop_chop_flutter/screens/access/sign_up/name_details_page.dart';
+import 'package:chop_chop_flutter/screens/services/auth_service.dart';
 import 'package:chop_chop_flutter/screens/shared/big_title.dart';
 import 'package:chop_chop_flutter/screens/shared/call_to_action_button.dart';
 import 'package:chop_chop_flutter/screens/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class EnterNumberPage extends StatefulWidget {
@@ -14,18 +16,10 @@ class EnterNumberPage extends StatefulWidget {
 class _EnterNumberPageState extends State<EnterNumberPage> {
   final _enterNumFormKey = GlobalKey<FormState>();
   final _verifyFormKey = GlobalKey<FormState>();
-  String _phoneNo, _smsCode, _verificationId;
   bool _smsCodeSent = false, _isButtonDisabled = true;
-  int _resendToken;
 
-  final AuthService _authService = AuthService();
-
-  BoxDecoration get _pinPutDecoration {
-    return BoxDecoration(
-      border: Border.all(color: Color(0xFFFFBB00), width: 3),
-      borderRadius: BorderRadius.circular(10),
-    );
-  }
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _smsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +27,26 @@ class _EnterNumberPageState extends State<EnterNumberPage> {
       appBar: AppBar(
         backgroundColor: Color(0xFFFAFAFA),
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 0),
-          child: BackButton(),
-        ),
+        leading: BackButton(),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Center(
+              child: FlatButton(
+                padding: EdgeInsets.all(5),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
+                color: Color(0xFFCCCCCC),
+                child: Text(
+                  "Logout", 
+                  style: TextStyle(
+                    fontSize: 14, 
+                  ),
+                ),
+                onPressed: () { context.read<AuthService>().signOut(); },
+              ),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Form(
@@ -57,22 +67,16 @@ class _EnterNumberPageState extends State<EnterNumberPage> {
               onPressed: _isButtonDisabled ? null : () async {
                 if ((_smsCodeSent ? _verifyFormKey : _enterNumFormKey).currentState.validate()) {
                   if(_smsCodeSent == true){
-                    await _authService.verifySMSCode(context, _verificationId, _smsCode);
+                    await context.read<AuthService>()
+                      .checkSMSCode(_smsController.text.trim())
+                      .then((value) => Navigator
+                        .push(context, MaterialPageRoute(builder: (context) => NameDetailsPage())));
                   } else {
-                    await _authService.verifyUserPhoneNumber(
-                      context: context, 
-                      phoneNumber: _phoneNo,
-                      resendCode: _resendToken,
-                      codeSent: (String verificationId, int resendToken) {
-                        setState((){
-                          _smsCodeSent = true;
-                          _resendToken = resendToken;
-                          _verificationId = verificationId;
-                          _isButtonDisabled = true;
-                        });
-                        print("Code Sent");
-                      },
-                    );
+                    await context.read<AuthService>()
+                      .verifyWithPhone(
+                        phoneNo: "+233" + _phoneController.text.trim(),
+                        changeUI: () => setState((){_smsCodeSent = true;})
+                      );
                   }
                 }
               },
@@ -118,16 +122,14 @@ class _EnterNumberPageState extends State<EnterNumberPage> {
           Expanded(
             child: TextFormField(
               keyboardType: TextInputType.number,
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.normal),
-              decoration: textInputDecoration.copyWith(
-                labelText: "Phone Number",
-              ),
-              validator: (val) => val.isEmpty ? "Enter your phone number" : null,
-              onChanged: (val) {
+              controller: _phoneController,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+              decoration: textInputDecoration.copyWith(labelText: "Phone Number",),
+              validator: (phoneNo) => phoneNo.isEmpty ? "Enter your phone number" : null,
+              onChanged: (phoneNo) {
                 setState(() {
-                  _phoneNo = val;
-                  _isButtonDisabled = _phoneNo.isEmpty ? true : (_phoneNo.length < 9 || _phoneNo.length > 10);
+                  _isButtonDisabled = phoneNo.isEmpty ? true 
+                    : (phoneNo.length < 9 || phoneNo.length > 10);
                 });
               },
             ),
@@ -160,24 +162,20 @@ class _EnterNumberPageState extends State<EnterNumberPage> {
       PinPut(
         fieldsCount: 6,
         focusNode: FocusNode(),
-        controller: TextEditingController(),
-        submittedFieldDecoration: _pinPutDecoration,
-        selectedFieldDecoration: _pinPutDecoration,
-        followingFieldDecoration: _pinPutDecoration.copyWith(
+        keyboardType: TextInputType.number,
+        controller: _smsController,
+        submittedFieldDecoration: pinPutDecoration,
+        selectedFieldDecoration: pinPutDecoration,
+        followingFieldDecoration: pinPutDecoration.copyWith(
           border: Border.all(color: Color(0xFFCCCCCC), width: 3),
         ),
-        validator: (val) =>
-            val.isEmpty || val.length < 6 ? "Enter SMS Code" : null,
-        onChanged: (val) {
+        validator: (smsCode) =>
+            smsCode.isEmpty || smsCode.length < 6 ? "Enter SMS Code" : null,
+        onChanged: (smsCode) {
           setState(() {
-            _smsCode = val;
-            _isButtonDisabled = _smsCode.isEmpty ? true : _smsCode.length != 6;
+            _isButtonDisabled = smsCode.isEmpty ? true : smsCode.length != 6;
           });
         },
-        onSubmit: (String pin) {
-          setState(() => _smsCode = pin);
-        },
-        keyboardType: TextInputType.number,
       ),
       SizedBox(height: 32),
       Align(
@@ -185,18 +183,6 @@ class _EnterNumberPageState extends State<EnterNumberPage> {
         child: GestureDetector(
           onTap: () async {
             print("SMS Code Resent");
-            await _authService.verifyUserPhoneNumber(
-              context: context, 
-              phoneNumber: _phoneNo,
-              resendCode: _resendToken,
-              codeSent: (String verificationId, int resendToken) {
-                setState((){
-                  _resendToken = resendToken;
-                  _verificationId = verificationId;
-                });
-                print("Code has been resent");
-              },
-            );
           },
           child: Text(
             "Resend SMS Code",

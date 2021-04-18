@@ -16,7 +16,7 @@ class EmailPasswordPage extends StatefulWidget {
 }
 
 class _EmailPasswordPageState extends State<EmailPasswordPage> {
-  final _signUpFormKey = GlobalKey<FormState>();
+  final _emailPasswordFormKey = GlobalKey<FormState>();
   String _email, _password;
   final AuthService _authService = AuthService();
 
@@ -41,7 +41,7 @@ class _EmailPasswordPageState extends State<EmailPasswordPage> {
       ),
       body: SafeArea(
         child: Form(
-          key: _signUpFormKey,
+          key: _emailPasswordFormKey,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 36),
             children: <Widget>[
@@ -87,7 +87,7 @@ class _EmailPasswordPageState extends State<EmailPasswordPage> {
             CallToActionButton(
               buttonText: "Next",
               onPressed: () async {
-                if (_signUpFormKey.currentState.validate()) {
+                if (_emailPasswordFormKey.currentState.validate()) {
                   await _authService.registerWithEmailAndPassword(
                     context, _email, _password, widget.phoneAuthCredential);
                 }

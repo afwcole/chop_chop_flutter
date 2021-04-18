@@ -1,5 +1,5 @@
-import 'package:chop_chop_flutter/screens/access/signup/email_password_page.dart';
-import 'package:chop_chop_flutter/screens/access/signup/name_details_page.dart';
+import 'package:chop_chop_flutter/screens/access/sign_up/email_password_page.dart';
+import 'package:chop_chop_flutter/screens/access/sign_up/name_details_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

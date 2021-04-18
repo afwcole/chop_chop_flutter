@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 const borderRadius = BorderRadius.all(Radius.circular(10));
 
+BoxDecoration pinPutDecoration = BoxDecoration(
+  border: Border.all(color: Color(0xFFFFBB00), width: 3),
+  borderRadius: BorderRadius.circular(10),
+);
+
+
 const textInputDecoration = InputDecoration(
   floatingLabelBehavior: FloatingLabelBehavior.auto,
   fillColor: Colors.white,
