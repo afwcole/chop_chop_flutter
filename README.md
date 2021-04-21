@@ -1,16 +1,23 @@
-# chop_chop_flutter
+# CHOP CHOP
+## A KNUST Food Delivery App
 
-A new Flutter project.
+This is an attempt at creating a food delivery application for students at KNUST.
 
-## Getting Started
+This application includes...
+- a Sign-Up page
+- a Sign In page
+- a Homepage
+- a Meal Profile Page
+- Restaurant Profile Page
+amongst and other UI pages and elements.
 
-This project is a starting point for a Flutter application.
+It also has functioning sign-in and sign-up features which were implemented with Firebase on the back-end.
 
-A few resources to get you started if this is your first Flutter project:
+This application is yet to be fully completed.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Requirements
+* Any Operating System (ie. MacOS X, Linux, Windows)
+* Any IDE with Flutter SDK installed (ie.  Android Studio, VSCode, IntelliJ, etc)
+* Knowledge of Dart and Flutter
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If this Repo is useful to you kindly give a star. thanks :)
