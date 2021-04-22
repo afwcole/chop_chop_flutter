@@ -25,3 +25,6 @@ This application is yet to be fully completed.
 * Knowledge of Dart and Flutter
 
 If this Repo is useful to you kindly give a star. thanks :)
+
+Designed by yours truly with Adobe XD.
+Coded by yours truly with Flutter.
