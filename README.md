@@ -11,9 +11,14 @@ This application includes...
 - Restaurant Profile Page
 amongst and other UI pages and elements.
 
+It also has functioning sign-in and sign-up features which were implemented with Firebase on the back-end.
+
+## Screenshots of Chop Chop UI
+<img src="images/Chop%20Chop%20Screenshots%20all.jpg" height="700">
+
+## Screen Recording of Chop Chop UI
 <img src="images/chopchop.gif" height="700">
 
-It also has functioning sign-in and sign-up features which were implemented with Firebase on the back-end.
 
 This application is yet to be fully completed.
 
