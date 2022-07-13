@@ -17,7 +17,7 @@ It also has functioning sign-in and sign-up features which were implemented with
 <img src="images/Chop%20Chop%20Screenshots%20all.jpg" width="400"> <img src="images/chopchop.gif" width="250">
 
 
-This application is yet to be fully completed.
+
 
 ## Requirements
 * Any Operating System (ie. MacOS X, Linux, Windows)
@@ -28,3 +28,5 @@ If this Repo is useful to you kindly give a star. thanks :)
 
 Designed by yours truly with Adobe XD.
 Coded by yours truly with Flutter.
+
+NB: This application is not complete.
